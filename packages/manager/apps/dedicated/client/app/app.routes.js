@@ -33,6 +33,27 @@ angular.module('App').config(
       },
     });
 
+    $stateProvider.state('app.userContracts', {
+      url: '/user-contracts',
+      redirectTo: ($transition$) => {
+        const { contracts } = $transition$.params();
+        return contracts ? false : 'app.configuration';
+      },
+      views: {
+        'app@': {
+          component: 'userContracts',
+        },
+      },
+      params: {
+        contracts: null,
+      },
+      resolve: {
+        contracts: /* @ngInject */ ($transition$) =>
+          $transition$.params().contracts,
+        from: /* @ngInject */ () => 'app.configuration',
+      },
+    });
+
     // CDN & NAS
     $stateProvider.state('app.networks', {
       abstract: true,

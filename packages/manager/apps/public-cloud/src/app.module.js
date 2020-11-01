@@ -20,6 +20,7 @@ import get from 'lodash/get';
 import has from 'lodash/has';
 
 import navbar from '@ovh-ux/manager-navbar';
+import ovhManagerUserContracts from '@ovh-ux/manager-user-contracts';
 import ovhManagerAccountSidebar from '@ovh-ux/manager-account-sidebar';
 import ovhManagerCore from '@ovh-ux/manager-core';
 import ovhManagerMfaEnrollment from '@ovh-ux/mfa-enrollment';
@@ -68,6 +69,7 @@ angular
       ovhManagerCore,
       ovhManagerMfaEnrollment,
       ovhManagerPci,
+      ovhManagerUserContracts,
       ovhNotificationsSidebar,
       uiRouter,
     ].filter((value) => value !== null),
