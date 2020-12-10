@@ -8,6 +8,7 @@ import ngAtInternet from '@ovh-ux/ng-at-internet';
 import ngAtInternetUiRouterPlugin from '@ovh-ux/ng-at-internet-ui-router-plugin';
 import ngOvhApiWrappers from '@ovh-ux/ng-ovh-api-wrappers';
 import ngOvhBrowserAlert from '@ovh-ux/ng-ovh-browser-alert';
+import ngOvhDedicatedUniverseComponents from '@ovh-ux/ng-ovh-dedicated-universe-components';
 import ngOvhExportCsv from '@ovh-ux/ng-ovh-export-csv';
 import ngOvhFeatureFlipping from '@ovh-ux/ng-ovh-feature-flipping';
 import ngOvhHttp from '@ovh-ux/ng-ovh-http';
@@ -52,11 +53,13 @@ import ovhManagerCloudConnect from '@ovh-ux/manager-cloud-connect';
 import { detach as detachPreloader } from '@ovh-ux/manager-preloader';
 import ovhNotificationsSidebar from '@ovh-ux/manager-notifications-sidebar';
 import ovhManagerAccountMigration from '@ovh-ux/manager-account-migration';
+import { billingManagement } from '@ovh-ux/manager-billing';
+import ovhManagerUserAccount from '@ovh-ux/manager-user-account';
+
 import account from './account';
 import config from './config/config';
 import contactsService from './account/contacts/service/contacts-service.module';
 import dedicatedCloud from './dedicatedCloud';
-import dedicatedUniverseComponents from './dedicatedUniverseComponents';
 import managedBaremetal from './managedBaremetal';
 import errorPage from './error';
 
@@ -77,13 +80,12 @@ angular
       account,
       ovhManagerAccountSidebar,
       ovhManagerCore,
-      'Billing',
+      billingManagement,
       chartjs,
       'controllers',
       contactsService,
       dedicatedCloud,
       dedicatedServer,
-      dedicatedUniverseComponents,
       'directives',
       errorPage,
       'filters',
@@ -141,6 +143,7 @@ angular
       ovhManagerVps,
       ovhManagerVrack,
       ovhManagerCloudConnect,
+      ovhManagerUserAccount,
       ovhPaymentMethod,
       'pascalprecht.translate',
       'services',
@@ -150,9 +153,9 @@ angular
       'ui.utils',
       'ui.validate',
       uiRouter,
-      'UserAccount',
       userContracts,
       'xeditable',
+      ngOvhDedicatedUniverseComponents,
     ].filter(isString),
   )
   .constant('constants', {
@@ -213,8 +216,8 @@ angular
     ROUTABLE_IP: /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/,
     ROUTABLE_BLOCK_OR_IP: /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\/(\d|[1-2]\d|3[0-2]))?$/,
   })
-  .run((ssoAuthentication, User) => {
-    ssoAuthentication.login().then(() => User.getUser());
+  .run((ssoAuthentication, ducUser) => {
+    ssoAuthentication.login().then(() => ducUser.getUser());
   })
   .run(
     /* @ngInject */ (
