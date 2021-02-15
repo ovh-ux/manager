@@ -9,7 +9,8 @@ import { Environment } from '@ovh-ux/manager-config';
 
 export default class FlavorsListController {
   /* @ngInject */
-  constructor($q, $state, PciProjectFlavors) {
+  constructor($filter, $q, $state, PciProjectFlavors) {
+    this.$filter = $filter;
     this.$q = $q;
     this.$state = $state;
     this.PciProjectFlavors = PciProjectFlavors;
@@ -133,5 +134,35 @@ export default class FlavorsListController {
       (!this.includeCategories || this.includeCategories.includes(category)) &&
       !(this.excludeCategories && this.excludeCategories.includes(category))
     );
+  }
+
+  getStorageLabel(flavor) {
+    if (flavor.technicalBlob) {
+      const { disks } = flavor.technicalBlob.storage;
+      return disks
+        .map((disk) => {
+          if (disk.number > 1) {
+            return `${disk.number} x ${this.$filter('cucBytes')(
+              disk.capacity,
+              2,
+              false,
+              'GB',
+            )} ${disk.technology || disk.interface}`;
+          }
+          return `${this.$filter('cucBytes')(
+            disk.capacity,
+            2,
+            false,
+            'GB',
+          )} ${disk.technology || disk.interface}`;
+        })
+        .join(' + ');
+    }
+    return `${this.$filter('cucBytes')(
+      flavor.disk,
+      2,
+      false,
+      'GB',
+    )} ${flavor.diskType.toUpperCase()}`;
   }
 }
