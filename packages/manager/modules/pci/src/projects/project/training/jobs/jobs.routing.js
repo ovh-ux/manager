@@ -7,11 +7,28 @@ export default /* @ngInject */ ($stateProvider) => {
         $translate.instant('pci_projects_project_training_jobs_title'),
       pricesCatalog: /* @ngInject */ (PciProjectTrainingService, projectId) =>
         PciProjectTrainingService.getPricesFromCatalog(projectId),
-      getPrice: /* @ngInject */ (pricesCatalog) => (qty) =>
-        pricesCatalog[`ai-training.ai1-standard.hour.consumption`]
-          .priceInUcents * qty,
-      getTax: /* @ngInject */ (pricesCatalog) => (qty) =>
-        pricesCatalog[`ai-training.ai1-standard.hour.consumption`].tax * qty,
+      getCatalogEntryF: /* @ngInject */ (pricesCatalog) => {
+        return function f(resourceId) {
+          let catalogEntry;
+          if (resourceId === 'gpu') {
+            // catalogEntry =
+            //   pricesCatalog[`ai-training.ai1-1-gpu.hour.consumption`];
+            catalogEntry =
+              pricesCatalog[`ai-training.ai1-standard.hour.consumption`];
+          } else {
+            // catalogEntry =
+            //   pricesCatalog[`ai-training.ai1-standard.hour.consumption`];
+            catalogEntry =
+              pricesCatalog[`ai-training.ai1-standard.hour.consumption`];
+          }
+          return catalogEntry;
+        };
+      },
+      getPrice: /* @ngInject */ (getCatalogEntryF) => (qty, resourceId) => {
+        return getCatalogEntryF(resourceId).priceInUcents * qty;
+      },
+      getTax: /* @ngInject */ (getCatalogEntryF) => (qty, resourceId) =>
+        getCatalogEntryF(resourceId).tax * qty,
       job: /* @ngInject */ (PciProjectTrainingJobService, projectId) => (
         jobId,
       ) => PciProjectTrainingJobService.get(projectId, jobId),

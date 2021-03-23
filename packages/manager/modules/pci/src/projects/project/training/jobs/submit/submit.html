@@ -349,34 +349,68 @@
                             maxlength="64"
                         />
                     </oui-field>
-                    <oui-field data-label="GPU" data-size="auto">
-                        <oui-select
-                            data-model="$ctrl.selectedGpu"
-                            data-items="$ctrl.gpus"
-                            data-required
-                            match="type"
-                            name="gpu"
-                            inline
+                    <oui-field data-label="Resource Type" data-size="auto">
+                        <oui-radio-toggle-group
+                            model="$ctrl.resourceId"
+                            on-change="$ctrl.onResourceTypeChange()"
                         >
-                            <span
-                                ng-bind="$item.type"
-                                class="d-inline-block text-truncate"
-                            ></span>
-                        </oui-select>
+                            <oui-radio value="$ctrl.gpuId">
+                                {{::
+                                'pci_projects_project_training_jobs_submit_select_config_resources_tips_gpu_identifier'
+                                | translate }}
+                            </oui-radio>
+                            <oui-radio value="$ctrl.cpuId">
+                                {{::
+                                'pci_projects_project_training_jobs_submit_select_config_resources_tips_cpu_identifier'
+                                | translate }}
+                            </oui-radio>
+                        </oui-radio-toggle-group>
                     </oui-field>
-                    <oui-field
-                        data-label="{{:: 'pci_projects_project_training_jobs_submit_select_config_resources_tips_gpu' | translate  }}"
-                        data-size="auto"
-                    >
-                        <oui-numeric
-                            data-min="1"
-                            data-max="$ctrl.selectedGpu.maxGpus"
-                            data-model="$ctrl.job.resources.gpu"
-                            data-on-change="$ctrl.computePricePerMinute(modelValue)"
-                            name="gpuCount"
+                    <div data-ng-if="$ctrl.resourceId == $ctrl.gpuId">
+                        <oui-field data-label="GPU" data-size="auto">
+                            <oui-select
+                                data-model="$ctrl.selectedGpu"
+                                data-items="$ctrl.resource.gpus"
+                                data-required
+                                match="model"
+                                name="gpu"
+                                inline
+                            >
+                                <span
+                                    ng-bind="$item.model"
+                                    class="d-inline-block text-truncate"
+                                ></span>
+                            </oui-select>
+                        </oui-field>
+                        <oui-field
+                            data-label="{{:: 'pci_projects_project_training_jobs_submit_select_config_resources_tips_gpu' | translate  }}"
+                            data-size="auto"
                         >
-                        </oui-numeric>
-                    </oui-field>
+                            <oui-numeric
+                                data-min="1"
+                                data-max="$ctrl.selectedGpu.maxGpus"
+                                data-model="$ctrl.job.resources.gpu"
+                                data-on-change="$ctrl.resourceN = modelValue"
+                                name="gpuCount"
+                            >
+                            </oui-numeric>
+                        </oui-field>
+                    </div>
+                    <div data-ng-if="$ctrl.resourceId == $ctrl.cpuId">
+                        <oui-field
+                            data-label="{{:: 'pci_projects_project_training_jobs_submit_select_config_resources_tips_cpu' | translate  }}"
+                            data-size="auto"
+                        >
+                            <oui-numeric
+                                data-min="1"
+                                data-max="$ctrl.maxCpus"
+                                data-model="$ctrl.job.resources.cpu"
+                                data-on-change="$ctrl.resourceN = modelValue"
+                                name="cpuCount"
+                            >
+                            </oui-numeric>
+                        </oui-field>
+                    </div>
                 </div>
                 <div class="col-md-4">
                     <oui-tile
@@ -388,8 +422,8 @@
                         >
                             <oui-tile-description>
                                 <ovh-manager-catalog-price
-                                    data-price="$ctrl.getPrice($ctrl.job.resources.gpu)"
-                                    data-tax="$ctrl.getTax($ctrl.job.resources.gpu)"
+                                    data-price="$ctrl.getPrice($ctrl.resourceN, $ctrl.resourceId)"
+                                    data-tax="$ctrl.getTax($ctrl.resourceN, $ctrl.resourceId)"
                                     data-user="$ctrl.user"
                                     data-perform-rounding="false"
                                     data-maximum-fraction-digits="3"
@@ -446,7 +480,7 @@
                                     <span>x</span>
                                     <span
                                         class="oui-status oui-status_info"
-                                        data-ng-bind="$ctrl.selectedGpu.type"
+                                        data-ng-bind="$ctrl.selectedGpu.model"
                                     ></span>
                                 </oui-tile-description>
                             </oui-tile-definition>
@@ -455,8 +489,8 @@
                             >
                                 <oui-tile-description>
                                     <ovh-manager-catalog-price
-                                        data-price="$ctrl.getPrice($ctrl.job.resources.gpu)"
-                                        data-tax="$ctrl.getTax($ctrl.job.resources.gpu)"
+                                        data-price="$ctrl.getPrice($ctrl.resourceN, $ctrl.resourceId)"
+                                        data-tax="$ctrl.getTax($ctrl.resourceN, $ctrl.resourceId)"
                                         data-user="$ctrl.user"
                                         data-perform-rounding="false"
                                         data-maximum-fraction-digits="3"

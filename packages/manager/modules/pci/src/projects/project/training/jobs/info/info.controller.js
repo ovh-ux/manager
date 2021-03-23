@@ -33,8 +33,17 @@ export default class PciTrainingJobsInfoController {
   $onInit() {
     this.guideUrl = GUIDE_URL;
 
-    this.unitPrice = this.getPrice(1);
-    this.unitTax = this.getTax(1);
+    let resourceId;
+    let resourceN;
+    if (this.job.spec.resources.gpu >= 1) {
+      resourceId = 'gpu';
+      resourceN = this.job.spec.resources.gpu;
+    } else {
+      resourceId = 'cpu';
+      resourceN = this.job.spec.resources.cpu;
+    }
+    this.unitPrice = this.getPrice(resourceN, resourceId);
+    this.unitTax = this.getTax(resourceN, resourceId);
     const totalHour = this.job.status.duration / 3600;
     this.price = this.unitPrice * totalHour;
     this.tax = this.unitTax * totalHour;
