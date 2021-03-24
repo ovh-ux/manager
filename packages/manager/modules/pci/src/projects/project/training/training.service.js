@@ -106,7 +106,6 @@ export default class PciProjectTrainingService {
       }).$promise;
   }
 
-  // eslint-disable-next-line no-unused-vars
   getResources(serviceName, region) {
     return this.OvhApiCloudProjectAi.Capabilities()
       .Training()

@@ -131,6 +131,14 @@
             valid="$ctrl.validateVolume() || !$ctrl.job.addVolume"
             data-on-submit="$ctrl.submitVolume()"
         >
+            <oui-message type="info" dismissable="true">
+                {{::
+                'pci_projects_project_training_jobs_submit_select_data_tips_1' |
+                translate}}<br />
+                {{::
+                'pci_projects_project_training_jobs_submit_select_data_tips_2' |
+                translate}}
+            </oui-message>
             <div data-ng-if="!$ctrl.containers.length">
                 <div
                     class="text-danger"
@@ -185,7 +193,24 @@
                                 </div>
                                 <div class="oui-inline-adder__field">
                                     <oui-field
-                                        data-label="{{:: 'pci_projects_project_training_jobs_submit_data_mount_path' | translate  }}"
+                                        data-label="{{:: 'pci_projects_project_training_jobs_submit_data_prefix' | translate  }}"
+                            data-label-popover="{{:: 'pci_projects_project_training_jobs_submit_data_prefix_help' | translate }}"
+                        >
+                            <input
+                                type="text"
+                                class="oui-input"
+                                placeholder=""
+                                data-ng-init=""
+                                name="prefix"
+                                data-ng-model="prefix"
+                                data-ng-pattern="/^\/(\S)*/"
+                                data-ng-model-options="{ debounce: 500 }"
+                            />
+                        </oui-field>
+                    </oui-inline-adder-field>
+                    <oui-inline-adder-field>
+                        <oui-field
+                            data-label="{{:: 'pci_projects_project_training_jobs_submit_data_mount_path' | translate  }}"
                                     >
                                         <input
                                             type="text"
@@ -205,6 +230,7 @@
                                 <div class="oui-inline-adder__field">
                                     <oui-field
                                         data-label="{{:: 'pci_projects_project_training_jobs_submit_data_permission' | translate  }}"
+                            data-label-popover="{{:: 'pci_projects_project_training_jobs_submit_data_permission_help' | translate }}"
                                         size="m"
                                     >
                                         <label class="oui-select">
@@ -227,6 +253,18 @@
                                                 aria-hidden="true"
                                             ></span>
                                         </label>
+                        </oui-field>
+                    </oui-inline-adder-field>
+                    <oui-inline-adder-field data-adaptive>
+                        <oui-field
+                            data-label="{{:: 'pci_projects_project_training_jobs_submit_data_cache' | translate  }}"
+                            data-label-popover="{{:: 'pci_projects_project_training_jobs_submit_data_cache_help' | translate }}"
+                            size="auto"
+                        >
+                            <oui-checkbox
+                                data-ng-model="cache"
+                                name="cache"
+                            ></oui-checkbox>
                                     </oui-field>
                                 </div>
                             </div>
@@ -472,6 +510,7 @@
                         >
                             <oui-tile-definition
                                 data-term="{{:: 'pci_projects_project_training_jobs_submit_select_config_resources_tips_gpu' | translate  }}"
+                                ng-if="$ctrl.resourceId === $ctrl.gpuId"
                             >
                                 <oui-tile-description>
                                     <span
@@ -481,6 +520,16 @@
                                     <span
                                         class="oui-status oui-status_info"
                                         data-ng-bind="$ctrl.selectedGpu.model"
+                                    ></span>
+                                </oui-tile-description>
+                            </oui-tile-definition>
+                            <oui-tile-definition
+                                data-term="{{:: 'pci_projects_project_training_jobs_submit_select_config_resources_tips_cpu' | translate  }}"
+                                ng-if="$ctrl.resourceId === $ctrl.cpuId"
+                            >
+                                <oui-tile-description>
+                                    <span
+                                        data-ng-bind="$ctrl.job.resources.cpu"
                                     ></span>
                                 </oui-tile-description>
                             </oui-tile-definition>
