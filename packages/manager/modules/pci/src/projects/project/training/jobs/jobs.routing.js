@@ -11,24 +11,20 @@ export default /* @ngInject */ ($stateProvider) => {
         return function f(resourceId) {
           let catalogEntry;
           if (resourceId === 'gpu') {
-            // catalogEntry =
-            //   pricesCatalog[`ai-training.ai1-1-gpu.hour.consumption`];
             catalogEntry =
-              pricesCatalog[`ai-training.ai1-standard.hour.consumption`];
+              pricesCatalog[`ai-training.ai1-1-gpu.minute.consumption`];
           } else {
-            // catalogEntry =
-            //   pricesCatalog[`ai-training.ai1-standard.hour.consumption`];
             catalogEntry =
-              pricesCatalog[`ai-training.ai1-standard.hour.consumption`];
+              pricesCatalog[`ai-training.ai1-1-cpu.minute.consumption`];
           }
           return catalogEntry;
         };
       },
       getPrice: /* @ngInject */ (getCatalogEntryF) => (qty, resourceId) => {
-        return getCatalogEntryF(resourceId).priceInUcents * qty;
+        return getCatalogEntryF(resourceId).priceInUcents * 60 * qty;
       },
       getTax: /* @ngInject */ (getCatalogEntryF) => (qty, resourceId) =>
-        getCatalogEntryF(resourceId).tax * qty,
+        getCatalogEntryF(resourceId).tax * 60 * qty,
       job: /* @ngInject */ (PciProjectTrainingJobService, projectId) => (
         jobId,
       ) => PciProjectTrainingJobService.get(projectId, jobId),
