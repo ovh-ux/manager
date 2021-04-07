@@ -7,19 +7,8 @@ export default /* @ngInject */ ($stateProvider) => {
         $translate.instant('pci_projects_project_training_jobs_title'),
       pricesCatalog: /* @ngInject */ (PciProjectTrainingService, projectId) =>
         PciProjectTrainingService.getPricesFromCatalog(projectId),
-      getCatalogEntryF: /* @ngInject */ (pricesCatalog) => {
-        return function f(resourceId) {
-          let catalogEntry;
-          if (resourceId === 'gpu') {
-            catalogEntry =
-              pricesCatalog[`ai-training.ai1-1-gpu.minute.consumption`];
-          } else {
-            catalogEntry =
-              pricesCatalog[`ai-training.ai1-1-cpu.minute.consumption`];
-          }
-          return catalogEntry;
-        };
-      },
+      getCatalogEntryF: /* @ngInject */ (pricesCatalog) => (resourceId) =>
+        pricesCatalog[`ai-training.ai1-1-${resourceId}.minute.consumption`],
       getPrice: /* @ngInject */ (getCatalogEntryF) => (qty, resourceId) => {
         return getCatalogEntryF(resourceId).priceInUcents * 60 * qty;
       },

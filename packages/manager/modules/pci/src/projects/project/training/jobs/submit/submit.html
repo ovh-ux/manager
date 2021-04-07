@@ -132,12 +132,14 @@
             data-on-submit="$ctrl.submitVolume()"
         >
             <oui-message type="info" dismissable="true">
-                {{::
-                'pci_projects_project_training_jobs_submit_select_data_tips_1' |
-                translate}}<br />
-                {{::
-                'pci_projects_project_training_jobs_submit_select_data_tips_2' |
-                translate}}
+                <span
+                    class="d-block"
+                    data-translate="pci_projects_project_training_jobs_submit_select_data_tips_1"
+                ></span>
+                <span
+                    class="d-block"
+                    data-translate="pci_projects_project_training_jobs_submit_select_data_tips_2"
+                ></span>
             </oui-message>
             <div data-ng-if="!$ctrl.containers.length">
                 <div
@@ -202,7 +204,7 @@
                                 placeholder=""
                                 data-ng-init=""
                                 name="prefix"
-                                data-ng-model="prefix"
+                                data-ng-model="$ctrl.prefix"
                                 data-ng-pattern="/^\/(\S)*/"
                                 data-ng-model-options="{ debounce: 500 }"
                             />
@@ -262,7 +264,7 @@
                             size="auto"
                         >
                             <oui-checkbox
-                                data-ng-model="cache"
+                                data-ng-model="$ctrl.cache"
                                 name="cache"
                             ></oui-checkbox>
                                     </oui-field>
