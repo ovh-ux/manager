@@ -9,6 +9,7 @@ import { Environment } from '@ovh-ux/manager-config';
 import { buildURL } from '@ovh-ux/ufrontend/url-builder';
 import ovhManagerAtInternetConfiguration from '@ovh-ux/manager-at-internet-configuration';
 import ovhManagerCore from '@ovh-ux/manager-core';
+import ovhManagerOrder from '@ovh-ux/manager-order';
 import ngAtInternet from '@ovh-ux/ng-at-internet';
 import ngAtInternetUiRouterPlugin from '@ovh-ux/ng-at-internet-ui-router-plugin';
 import ngOvhApiWrappers from '@ovh-ux/ng-ovh-api-wrappers';
@@ -85,6 +86,7 @@ angular
     [
       ovhManagerAccountSidebar,
       ovhManagerCore,
+      ovhManagerOrder,
       ngPaginationFront,
       'ngOvhUtils',
       'ui.bootstrap',

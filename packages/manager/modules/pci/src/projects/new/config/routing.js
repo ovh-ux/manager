@@ -28,8 +28,8 @@ export default /* @ngInject */ ($stateProvider) => {
         return $state.href(actionState);
       },
 
-      summary: /* @ngInject */ (cart, orderCart) =>
-        orderCart.getSummary(cart.cartId),
+      summary: /* @ngInject */ (cart, OrderCartService) =>
+        OrderCartService.getSummary(cart.cartId),
 
       goToPayment: /* @ngInject */ ($state, cart) => () =>
         $state.go('pci.projects.new.payment', {

@@ -20,8 +20,8 @@ export default /* @ngInject */ ($stateProvider) => {
       defaultPaymentChoose ||
       (autoPayWithPreferredPaymentMethod && isOptionFree),
 
-    catalogAddons: /* @ngInject */ (user, WucOrderCartService) =>
-      WucOrderCartService.getProductPublicCatalog(
+    catalogAddons: /* @ngInject */ (OrderCartService, user) =>
+      OrderCartService.getProductPublicCatalog(
         user.ovhSubsidiary,
         'webHosting',
       ),

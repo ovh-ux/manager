@@ -10,13 +10,13 @@ export default class ProductOffersController {
     $timeout,
     $translate,
     ovhManagerProductOffersDetachService,
-    WucOrderCartService,
+    OrderCartService,
   ) {
     this.$q = $q;
     this.$timeout = $timeout;
     this.$translate = $translate;
     this.detachService = ovhManagerProductOffersDetachService;
-    this.WucOrderCartService = WucOrderCartService;
+    this.OrderCartService = OrderCartService;
   }
 
   $onInit() {
@@ -35,8 +35,8 @@ export default class ProductOffersController {
         this.workflow = new OrderWorkflow(
           this.$q,
           this.$translate,
+          this.OrderCartService,
           this.workflowOptions,
-          this.WucOrderCartService,
         );
         break;
       case WORKFLOW_TYPES.SERVICES:

@@ -78,9 +78,8 @@ export default /* @ngInject */ ($stateProvider) => {
         }),
       currentActiveLink: /* @ngInject */ ($transition$, $state) => () =>
         $state.href($state.current.name, $transition$.params()),
-
-      availableOptions: /* @ngInject */ (WucOrderCartService, serviceName) =>
-        WucOrderCartService.getProductServiceOptions(
+      availableOptions: /* @ngInject */ (OrderCartService, serviceName) =>
+        OrderCartService.getProductServiceOptions(
           'webHosting',
           serviceName,
         ).catch(() => []),

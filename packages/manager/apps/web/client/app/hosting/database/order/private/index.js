@@ -1,3 +1,5 @@
+import ovhManagerOrder from '@ovh-ux/manager-order';
+
 import component from './hosting-database-order-private.component';
 import routing from './hosting-database-order-private.routing';
 import service from './hosting-database-order-private.service';
@@ -5,7 +7,7 @@ import service from './hosting-database-order-private.service';
 const moduleName = 'ovhManagerHostingDatabaseOrderPrivate';
 
 angular
-  .module(moduleName, [])
+  .module(moduleName, [ovhManagerOrder])
   .config(routing)
   .component('hostingDatabaseOrderPrivate', component)
   .service('HostingDatabaseOrderPrivateService', service)
