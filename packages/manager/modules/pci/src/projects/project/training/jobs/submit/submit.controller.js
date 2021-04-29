@@ -192,6 +192,7 @@ export default class PciTrainingJobsSubmitController {
   }
 
   submitJob() {
+    console.log(this.job);
     this.atInternet.trackClick({
       name:
         'public-cloud::pci::projects::project::training::jobs::submit::confirm',
