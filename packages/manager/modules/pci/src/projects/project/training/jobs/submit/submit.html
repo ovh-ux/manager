@@ -196,23 +196,25 @@
                                 <div class="oui-inline-adder__field">
                                     <oui-field
                                         data-label="{{:: 'pci_projects_project_training_jobs_submit_data_prefix' | translate  }}"
-                            data-label-popover="{{:: 'pci_projects_project_training_jobs_submit_data_prefix_help' | translate }}"
-                        >
-                            <input
-                                type="text"
-                                class="oui-input"
-                                placeholder=""
-                                data-ng-init=""
-                                name="prefix"
-                                data-ng-model="$ctrl.prefix"
-                                data-ng-pattern="/^\/(\S)*/"
-                                data-ng-model-options="{ debounce: 500 }"
-                            />
-                        </oui-field>
-                    </oui-inline-adder-field>
-                    <oui-inline-adder-field>
-                        <oui-field
-                            data-label="{{:: 'pci_projects_project_training_jobs_submit_data_mount_path' | translate  }}"
+                                        data-label-popover="{{:: 'pci_projects_project_training_jobs_submit_data_prefix_help' | translate }}"
+                                    >
+                                        <input
+                                            type="text"
+                                            class="oui-input"
+                                            placeholder=""
+                                            data-ng-init="$ctrl.httpHeader[$index].model.prefix = ''"
+                                            name="prefix"
+                                            data-ng-model="$ctrl.httpHeader[$index].model.prefix"
+                                            data-ng-pattern="/^\/(\S)*/"
+                                            data-ng-model-options="{ debounce: 500 }"
+                                            data-ng-required="$ctrl.httpHeader[$index].model.prefix"
+                                            data-ng-disabled="$ctrl.httpHeader[$index].added"
+                                        />
+                                    </oui-field>
+                                </div>
+                                <div class="oui-inline-adder__field">
+                                    <oui-field
+                                        data-label="{{:: 'pci_projects_project_training_jobs_submit_data_mount_path' | translate  }}"
                                     >
                                         <input
                                             type="text"
@@ -232,7 +234,7 @@
                                 <div class="oui-inline-adder__field">
                                     <oui-field
                                         data-label="{{:: 'pci_projects_project_training_jobs_submit_data_permission' | translate  }}"
-                            data-label-popover="{{:: 'pci_projects_project_training_jobs_submit_data_permission_help' | translate }}"
+                                        data-label-popover="{{:: 'pci_projects_project_training_jobs_submit_data_permission_help' | translate }}"
                                         size="m"
                                     >
                                         <label class="oui-select">
@@ -255,18 +257,20 @@
                                                 aria-hidden="true"
                                             ></span>
                                         </label>
-                        </oui-field>
-                    </oui-inline-adder-field>
-                    <oui-inline-adder-field data-adaptive>
-                        <oui-field
-                            data-label="{{:: 'pci_projects_project_training_jobs_submit_data_cache' | translate  }}"
-                            data-label-popover="{{:: 'pci_projects_project_training_jobs_submit_data_cache_help' | translate }}"
-                            size="auto"
-                        >
-                            <oui-checkbox
-                                data-ng-model="$ctrl.cache"
-                                name="cache"
-                            ></oui-checkbox>
+                                    </oui-field>
+                                </div>
+                                <div class="oui-inline-adder__field">
+                                    <oui-field
+                                        data-label="{{:: 'pci_projects_project_training_jobs_submit_data_cache' | translate  }}"
+                                        data-label-popover="{{:: 'pci_projects_project_training_jobs_submit_data_cache_help' | translate }}"
+                                        size="auto"
+                                    >
+                                        <oui-checkbox
+                                            class="oui-checkbox"
+                                            name="cache"
+                                            ng-model="$ctrl.httpHeader[$index].model.cache"
+                                            data-ng-disabled="$ctrl.httpHeader[$index].added"
+                                        ></oui-checkbox>
                                     </oui-field>
                                 </div>
                             </div>
