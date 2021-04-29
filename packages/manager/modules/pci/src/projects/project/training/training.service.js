@@ -112,7 +112,7 @@ export default class PciProjectTrainingService {
       .Region()
       .Resource()
       .v6()
-      .query({
+      .get({
         serviceName,
         region,
       }).$promise;
