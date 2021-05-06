@@ -1,3 +1,5 @@
+import i18n from 'i18next';
+import { initReactI18next } from 'react-i18next';
 import registerApplication from '@ovh-ux/ufrontend/application';
 import {
   attach as attachPreloader,
@@ -12,5 +14,10 @@ registerApplication('hub').then(({ environment }) => {
   if (environment.getMessage()) {
     displayMessage(environment.getMessage(), environment.getUserLanguage());
   }
+  const locale = environment.getUserLocale();
+  i18n.use(initReactI18next).init({
+    lng: locale,
+    fallbackLng: 'en',
+  });
   import('./app.jsx').finally(detachPreloader);
 });

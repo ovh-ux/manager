@@ -7,5 +7,8 @@ module.exports = {
     react: {
       version: "detect"
     }
+  },
+  rules: {
+    'import/extensions': 'off',
   }
 };

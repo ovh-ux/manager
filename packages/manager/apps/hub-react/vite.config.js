@@ -35,6 +35,13 @@ module.exports = defineConfig({
     }),
     viteOvhDevServerPlugin(),
   ],
+  resolve: {
+    alias: {
+      src: path.resolve(__dirname, 'src'),
+      // @TODO get non-relative monorepo root path
+      '~': path.resolve(__dirname, '../../../../node_modules'),
+    },
+  },
   build: {
     outDir: path.resolve(__dirname, 'dist'),
     emptyOutDir: true,
