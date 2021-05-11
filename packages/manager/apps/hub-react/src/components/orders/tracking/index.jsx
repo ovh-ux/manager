@@ -9,6 +9,7 @@ import { buildURL } from '@ovh-ux/ufrontend/url-builder';
 import { getLastOrder } from 'src/datasource/orders';
 import context from 'src/context';
 import translations from './translations';
+import style from './index.module.scss';
 
 function loadTranslations() {
   return fetch(translations[i18n.language] || translations.en_GB)
@@ -50,7 +51,7 @@ function OrdersTracking({ t }) {
   }
 
   return (
-    <div className="oui-tile">
+    <div className={`oui-tile text-center ${style.bluebg}`}>
       <h3 className="oui-heading_4">
         {translationLoaded && t('orders_tracking_title')}
       </h3>
@@ -61,11 +62,15 @@ function OrdersTracking({ t }) {
       )}
       {lastOrder && (
         <>
-          <a className="mb-2 oui-badge oui-badge_info" href={lastOrderURL}>
-            {t('orders_tracking_order_id', { orderId: lastOrder.orderId })}
+          <a className="oui-badge oui-badge_info" href={lastOrderURL}>
+            <small>
+              {t('orders_tracking_order_id', { orderId: lastOrder.orderId })}
+            </small>
           </a>
           <div className="mb-3 d-flex justify-content-center flex-wrap">
-            <span className="font-weight-bold mr-1">{currentStatus.date}</span>
+            <span className="font-weight-bold mr-1 mt-4">
+              {currentStatus.date}
+            </span>
             <span className="mr-1">
               {t(`orders_tracking_history_${currentStatus.label}`)}
             </span>

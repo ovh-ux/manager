@@ -6,13 +6,17 @@ import '@ovh-ux/ui-kit/dist/css/oui.css';
 import 'src/app.scss';
 
 import BillingServices from 'src/components/billing/services';
+import HubWelcome from 'src/components/hub/welcome';
 import OrdersTracking from 'src/components/orders/tracking';
 
 const queryClient = new QueryClient();
 ReactDOM.render(
   <QueryClientProvider client={queryClient}>
     <div className="container-fluid">
-      <div className="row">
+      <div className="row mt-2">
+        <div className="col-md-12">
+          <HubWelcome />
+        </div>
         <div className="col-md-8">
           <BillingServices
             billingUrl={
