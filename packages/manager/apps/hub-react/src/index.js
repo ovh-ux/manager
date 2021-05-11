@@ -7,6 +7,7 @@ import {
   displayMessage,
 } from '@ovh-ux/manager-preloader';
 import { findAvailableLocale, detectUserLocale } from '@ovh-ux/manager-config';
+import appContext from 'src/context';
 
 attachPreloader(findAvailableLocale(detectUserLocale()));
 
@@ -19,5 +20,6 @@ registerApplication('hub').then(({ environment }) => {
     lng: locale,
     fallbackLng: 'en',
   });
+  appContext.setEnvironment(environment);
   import('./app.jsx').finally(detachPreloader);
 });
