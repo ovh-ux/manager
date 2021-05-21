@@ -35,6 +35,7 @@
     "bootstrap4": "twbs/bootstrap#v4.0.0",
     "i18next": "^19.6.2",
     "i18next-fetch-backend": "^3.0.0",
+    "i18next-http-backend": "^1.2.4",
     "lodash-es": "^4.17.15",
     "moment": "^2.29.1",
     "prop-types": "^15.7.2",
@@ -42,6 +43,7 @@
     "react-dom": "^16.12.0",
     "react-i18next": "^11.8.15",
     "react-query": "^3.13.12",
+    "react-router-dom": "^5.2.0",
     "react-use": "^17.1.1"
   },
   "devDependencies": {

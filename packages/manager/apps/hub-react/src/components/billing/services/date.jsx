@@ -44,4 +44,4 @@ BillingServiceDate.propTypes = {
   service: PropTypes.object,
 };
 
-export default withTranslation()(BillingServiceDate);
+export default withTranslation(['billing-services'])(BillingServiceDate);

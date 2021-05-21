@@ -50,4 +50,4 @@ BillingServiceStatus.propTypes = {
   service: PropTypes.object,
 };
 
-export default withTranslation()(BillingServiceStatus);
+export default withTranslation(['billing-services'])(BillingServiceStatus);

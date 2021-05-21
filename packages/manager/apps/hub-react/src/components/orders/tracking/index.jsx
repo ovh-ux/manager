@@ -1,30 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { useQuery } from 'react-query';
-import i18n from 'i18next';
 import { withTranslation } from 'react-i18next';
 import { maxBy } from 'lodash-es';
 
 import { buildURL } from '@ovh-ux/ufrontend/url-builder';
 import { getLastOrder } from 'src/datasource/orders';
 import context from 'src/context';
-import translations from './translations';
 import style from './index.module.scss';
 
-function loadTranslations() {
-  return fetch(translations[i18n.language] || translations.en_GB)
-    .then((res) => res.json())
-    .then((resource) =>
-      i18n.addResourceBundle(i18n.language, i18n.options.defaultNS, resource),
-    );
-}
-
 function OrdersTracking({ t }) {
-  const [translationLoaded, setTranslationLoaded] = useState(false);
-  useEffect(() => {
-    loadTranslations().then(() => setTranslationLoaded(true));
-  }, []);
-
   const { isLoading, error, data: lastOrder } = useQuery(
     'last-order',
     getLastOrder,
@@ -52,9 +37,7 @@ function OrdersTracking({ t }) {
 
   return (
     <div className={`oui-tile text-center ${style.bluebg}`}>
-      <h3 className="oui-heading_4">
-        {translationLoaded && t('orders_tracking_title')}
-      </h3>
+      <h3 className="oui-heading_4">{t('orders_tracking_title')}</h3>
       {error && (
         <div className="oui-message oui-message_error" role="alert">
           <span>{t('orders_tracking_error')}</span>
@@ -108,4 +91,4 @@ OrdersTracking.propTypes = {
   t: PropTypes.func,
 };
 
-export default withTranslation()(OrdersTracking);
+export default withTranslation(['orders-tracking'])(OrdersTracking);

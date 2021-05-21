@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { useQuery } from 'react-query';
-import i18n from 'i18next';
 import { withTranslation } from 'react-i18next';
 
 import { get as getBillingServices } from 'src/datasource/billing/services';
-import translations from './translations';
 
 import BillingStatus from './status';
 import BillingServiceDate from './date';
@@ -62,20 +60,7 @@ function renderTable({ services, t }) {
   );
 }
 
-function loadTranslations() {
-  return fetch(translations[i18n.language] || translations.en_GB)
-    .then((res) => res.json())
-    .then((resource) =>
-      i18n.addResourceBundle(i18n.language, i18n.options.defaultNS, resource),
-    );
-}
-
 function BillingServices({ t, billingUrl }) {
-  const [translationLoaded, setTranslationLoaded] = useState(false);
-  useEffect(() => {
-    loadTranslations().then(() => setTranslationLoaded(true));
-  }, []);
-
   const { isLoading, error, data: services } = useQuery(
     'billing-services',
     getBillingServices,
@@ -84,7 +69,7 @@ function BillingServices({ t, billingUrl }) {
   return (
     <div className="oui-tile">
       <h4 className="oui-tile__title">
-        {translationLoaded && <span>{t('billing_services_title')}</span>}
+        <span>{t('billing_services_title')}</span>
         {!isLoading && (
           <span className="oui-badge oui-badge_info ml-3">
             {services.length}
@@ -116,4 +101,4 @@ BillingServices.propTypes = {
   billingUrl: PropTypes.string,
 };
 
-export default withTranslation()(BillingServices);
+export default withTranslation(['billing-services'])(BillingServices);
