@@ -300,6 +300,13 @@ export default (containerEl, environment) => {
 
     /*= =========  CHECK IF STILL LOGGED IN  ========== */
     .run((ssoAuthentication, $transitions) => {
+      console.log('init transition hook error');
+      $transitions.onError({}, (transition) => {
+        console.log(transition);
+        const error = transition.error();
+        console.log(error);
+      });
+
       $transitions.onStart({}, (transition) => {
         const next = transition.to();
         let authenticate;

@@ -114,6 +114,7 @@ export default /* @ngInject */ function TucPackMediator(
       })
       .then(() =>
         self.fetchPackAccessByIds(map(packList, 'packName')).then((result) => {
+          console.log('-------------------');
           angular.forEach(result, (access) => {
             if (access.path && angular.isArray(access.value)) {
               const match = /\/pack\/xdsl\/([^/]+)/.exec(access.path);
@@ -124,12 +125,14 @@ export default /* @ngInject */ function TucPackMediator(
                   map(access.value, (id) => ({ accessName: id })),
                 );
               }
+              console.log(pack);
             }
           });
         }),
       )
       .then(() => {
         // fetch xdsl details of each xdsl
+        console.log('-------------------');
         const xdslIds = map(flatten(map(packList, 'xdsl')), 'accessName');
         return self.fetchXdslByIds(xdslIds).then((result) => {
           angular.forEach(result, (xdsl) => {
@@ -140,12 +143,16 @@ export default /* @ngInject */ function TucPackMediator(
               }
             });
           });
+          console.log(packList);
         });
       })
       .then(() => {
         // fetch line of each xdsl
         const xdslIds = map(flatten(map(packList, 'xdsl')), 'accessName');
         return self.fetchLinesByIds(xdslIds).then((lines) => {
+          console.log('-------------------');
+          console.log('lines');
+          console.log(lines);
           angular.forEach(lines, (result) => {
             if (result.path) {
               const match = /\/xdsl\/([^/]+)/.exec(result.path);
@@ -159,6 +166,11 @@ export default /* @ngInject */ function TucPackMediator(
             }
           });
         });
+      })
+      .then(() => {
+        console.log('-------------------');
+        console.log('pack list');
+        console.log(packList);
       })
       .then(() => packList);
   };
