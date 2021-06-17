@@ -6,7 +6,11 @@
   "billing_payment_method_split_payment_cancel": "Annuler",
   "billing_payment_method_split_payment_active": "Actif",
   "billing_payment_method_split_payment_inactive": "Inactif",
+  <<<<<<< HEAD
   "billing_payment_method_split_payment_activating": "En attente d'approbation",
+  =======
+  "billing_payment_method_split_payment_activating": "En attente d'approbation du serveur",
+  >>>>>>> 33f18165df... fix(i18n): add missing translations [CDS 981]
   "billing_payment_method_split_payment_deactivating": "En cours de désactivation",
   "billing_payment_method_split_payment_information_link": "Information sur le Split Payment",
   "billing_payment_method_split_payment_activate_success": "Votre demande d'activation du Split Payment a bien été prise en compte.",
