@@ -4,6 +4,7 @@ import ngOvhUtils from '@ovh-ux/ng-ovh-utils';
 import ngRoute from 'angular-route';
 import ngTranslateAsyncLoader from '@ovh-ux/ng-translate-async-loader';
 import ngSanitize from 'angular-sanitize';
+import ovhAccountMigration from '@ovh-ux/manager-account-migration';
 import ovhManagerCore from '@ovh-ux/manager-core';
 import set from 'lodash/set';
 import uiBootstrap from 'angular-ui-bootstrap';
@@ -49,6 +50,7 @@ angular
     paymentCreditAdd,
     order,
     orders,
+    ovhAccountMigration,
     ovhAccountRefund,
     refunds,
     ngOvhExportCsv,
