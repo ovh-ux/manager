@@ -9,6 +9,8 @@ import { findAvailableLocale, detectUserLocale } from '@ovh-ux/manager-config';
 
 attachPreloader(findAvailableLocale(detectUserLocale()));
 
+console.log('test');
+
 registerApplication('dedicated').then(({ environment }) => {
   environment.setVersion(__VERSION__);
 
