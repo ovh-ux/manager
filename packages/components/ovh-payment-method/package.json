@@ -1,7 +1,6 @@
 {
   "name": "@ovh-ux/ovh-payment-method",
   "version": "0.0.0",
-  "private": true,
   "description": "Get payment methods from different OVHcloud APIs",
   "repository": {
     "type": "git",
