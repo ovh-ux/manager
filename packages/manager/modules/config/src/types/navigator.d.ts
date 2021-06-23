@@ -1,0 +1,6 @@
+interface Navigator {
+  userLanguage?: string;
+  browserLanguage?: string;
+  languages: readonly string[];
+  language: string;
+}

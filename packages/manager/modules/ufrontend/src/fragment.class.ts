@@ -1,24 +1,26 @@
 import 'whatwg-fetch';
 import semverReverseCompare from 'semver/functions/rcompare';
 import semverMaxSatisfaying from 'semver/ranges/max-satisfying';
+import { uFrontendWindow } from './ufrontend';
 
-class OvhFragment extends HTMLElement {
+export default class OvhFragment extends HTMLElement {
+  private scriptElement: HTMLScriptElement;
   constructor() {
     super();
     this.scriptElement = null;
   }
 
   /** Returns the fragment unique identifier */
-  get id() {
+  get id(): string {
     return this.getAttribute('fragment-id');
   }
 
   /** Returns the fragment version (semver format) */
-  get version() {
+  get version(): string {
     return this.getAttribute('fragment-version');
   }
 
-  connectedCallback() {
+  connectedCallback(): void {
     // Note from mozilla documentation :
     // connectedCallback may be called once your element is no longer connected,
     // use Node.isConnected to make sure.
@@ -52,14 +54,14 @@ class OvhFragment extends HTMLElement {
             );
           };
           document.querySelector('head').appendChild(this.scriptElement);
-          window.ovhMicroFrontend.onFragmentRegister(this);
+          (window as uFrontendWindow).ovhMicroFrontend.onFragmentRegister(this);
         });
     }
   }
 
-  disconnectedCallback() {
+  disconnectedCallback(): void {
     if (!this.isConnected) {
-      window.ovhMicroFrontend.onFragmentUnloaded(this.id);
+      (window as uFrontendWindow).ovhMicroFrontend.onFragmentUnloaded(this.id);
       if (this.scriptElement) {
         this.scriptElement.remove();
         this.scriptElement = null;
@@ -67,5 +69,3 @@ class OvhFragment extends HTMLElement {
     }
   }
 }
-
-export default OvhFragment;
