@@ -21,5 +21,6 @@
   "dedicatedCloud_tab_datastores_status_ERROR": "Erreur",
   "dedicatedCloud_tab_datastores_status_REMOVING": "Suppression en cours",
   "dedicatedCloud_tab_datastores_status_UNKNOWN": "Inconnu",
-  "dedicatedCloud_tab_datastores_empty": "Aucun datastore"
+  "dedicatedCloud_tab_datastores_empty": "Aucun datastore",
+  "dedicatedCloud_convert_datastore_to_global": "Convertir le datastore en global"
 }

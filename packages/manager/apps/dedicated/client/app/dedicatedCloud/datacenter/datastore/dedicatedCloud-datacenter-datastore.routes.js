@@ -47,6 +47,26 @@ export default /* @ngInject */ ($stateProvider) => {
 
           return promise;
         },
+        goToConvertToGlobal: /* @ngInject */ (
+          $state,
+          currentService,
+          datacenterId,
+        ) => (datastore) => {
+          console.log(
+            'goToConvertToGlobal',
+            currentService.serviceName,
+            datacenterId,
+            datastore.id,
+          );
+          return $state.go(
+            'app.dedicatedCloud.details.datacenter.details.datastores.convertToGlobal',
+            {
+              productId: currentService.serviceName,
+              datacenterId,
+              datastoreId: datastore.id,
+            },
+          );
+        },
         breadcrumb: /* @ngInject */ ($translate) =>
           $translate.instant(
             'dedicated_cloud_datacenters_datacenter_datastores',

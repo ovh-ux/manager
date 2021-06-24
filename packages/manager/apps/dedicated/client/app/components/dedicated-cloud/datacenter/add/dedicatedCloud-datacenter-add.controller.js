@@ -1,8 +1,10 @@
+import get from 'lodash/get';
 import { COMMERCIAL_RANGE_ENUM } from './dedicatedCloud-datacenter-add.constant';
 
 export default class {
   /* @ngInject */
-  constructor($translate, DedicatedCloud) {
+  constructor($q, $translate, DedicatedCloud) {
+    this.$q = $q;
     this.$translate = $translate;
     this.DedicatedCloud = DedicatedCloud;
     this.COMMERCIAL_RANGE_ENUM = COMMERCIAL_RANGE_ENUM;
@@ -21,20 +23,30 @@ export default class {
 
   load() {
     this.loader = true;
-    this.DedicatedCloud.getCommercialRangeList(this.serviceName)
-      .then(
-        (list) => {
-          this.commercialRange.list = list;
-        },
-        (data) => {
-          this.goBack(
-            `${this.$translate.instant(
-              'dedicatedCloud_datacenters_adding_load_error',
-            )}: ${data.message || ''}`,
-            'danger',
-          );
-        },
-      )
+    this.$q
+      .all({
+        orderable: this.DedicatedCloud.getCommercialRangeList(this.serviceName),
+        compliance: this.DedicatedCloud.getCommercialRangeCompliance(
+          this.serviceName,
+        ),
+      })
+      .then(({ orderable, compliance }) => {
+        if (get(compliance[0], 'upgradeRequired', false)) {
+          this.commercialRange.list = compliance;
+        }
+
+        this.commercialRange.list = this.commercialRange.list.concat(
+          orderable.map((range) => ({ name: range })),
+        );
+      })
+      .catch((err) => {
+        this.goBack(
+          `${this.$translate.instant(
+            'dedicatedCloud_datacenters_adding_load_error',
+          )}: ${err.message || ''}`,
+          'danger',
+        );
+      })
       .finally(() => {
         this.loader = false;
       });
@@ -42,9 +54,17 @@ export default class {
 
   addDatacenter() {
     this.loader = true;
-    this.DedicatedCloud.addDatacenter(
+
+    if (get(this.commercialRange, 'model.upgradeRequired')) {
+      return this.goUpgradeRange(
+        get(this.commercialRange, 'model.name'),
+        get(this.commercialRange, 'model.upgradeCode'),
+      );
+    }
+
+    return this.DedicatedCloud.addDatacenter(
       this.serviceName,
-      this.commercialRange.model,
+      this.commercialRange.model.name,
     ).then(
       () => {
         this.goBack(
