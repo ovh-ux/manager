@@ -424,7 +424,7 @@ export default (containerEl, environment) => {
     .run(
       /* @ngInject */ ($rootScope, $transitions) => {
         const unregisterHook = $transitions.onSuccess({}, () => {
-          detachPreloader();
+          if (/beta/.test(window.location.href)) detachPreloader();
           $rootScope.$broadcast('app:started');
           unregisterHook();
         });

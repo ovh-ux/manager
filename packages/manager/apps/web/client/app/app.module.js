@@ -87,7 +87,6 @@ import emailpro from '@ovh-ux/manager-emailpro';
 import exchange from '@ovh-ux/manager-exchange';
 import office from '@ovh-ux/manager-office';
 import sharepoint from '@ovh-ux/manager-sharepoint';
-import { detach as detachPreloader } from '@ovh-ux/manager-preloader';
 import WebPaas from '@ovh-ux/manager-web-paas';
 
 import getConfig from './config/config';
@@ -587,7 +586,6 @@ export default (containerEl, environment) => {
     .run(
       /* @ngInject */ ($rootScope, $transitions) => {
         const unregisterHook = $transitions.onSuccess({}, () => {
-          detachPreloader();
           $rootScope.$broadcast('app:started');
           unregisterHook();
         });

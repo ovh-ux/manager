@@ -2,6 +2,7 @@ import 'script-loader!jquery'; // eslint-disable-line
 import 'whatwg-fetch';
 import {
   attach as attachPreloader,
+  detach as detachPreloader,
   displayMessage,
 } from '@ovh-ux/manager-preloader';
 import registerApplication from '@ovh-ux/ufrontend/application';
@@ -21,5 +22,6 @@ registerApplication('dedicated').then(({ environment }) => {
     .then(() => import('./app.module'))
     .then(({ default: startApplication }) => {
       startApplication(document.body, environment);
+      if (/alpha/.test(window.location.href)) detachPreloader();
     });
 });
