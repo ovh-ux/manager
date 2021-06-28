@@ -29,9 +29,9 @@ interface EnvironmentWebComponents {
   waitFor: Callback;
 }
 
-interface EnvironmentWindow extends Window {
-  ovhMicroFrontend: OvhMicroFrontend;
-  WebComponents: EnvironmentWebComponents;
+declare global {
+  interface Window {
+    ovhMicroFrontend: OvhMicroFrontend;
+    WebComponents: EnvironmentWebComponents;
+  }
 }
-
-export type uFrontendWindow = EnvironmentWindow & typeof globalThis;

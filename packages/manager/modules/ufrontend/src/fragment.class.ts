@@ -1,7 +1,6 @@
 import 'whatwg-fetch';
 import semverReverseCompare from 'semver/functions/rcompare';
 import semverMaxSatisfaying from 'semver/ranges/max-satisfying';
-import { uFrontendWindow } from './ufrontend';
 
 export default class OvhFragment extends HTMLElement {
   private scriptElement: HTMLScriptElement;
@@ -54,14 +53,14 @@ export default class OvhFragment extends HTMLElement {
             );
           };
           document.querySelector('head').appendChild(this.scriptElement);
-          (window as uFrontendWindow).ovhMicroFrontend.onFragmentRegister(this);
+          window.ovhMicroFrontend.onFragmentRegister(this);
         });
     }
   }
 
   disconnectedCallback(): void {
     if (!this.isConnected) {
-      (window as uFrontendWindow).ovhMicroFrontend.onFragmentUnloaded(this.id);
+      window.ovhMicroFrontend.onFragmentUnloaded(this.id);
       if (this.scriptElement) {
         this.scriptElement.remove();
         this.scriptElement = null;

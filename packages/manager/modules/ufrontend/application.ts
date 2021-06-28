@@ -1,15 +1,15 @@
 import '@webcomponents/webcomponentsjs/webcomponents-loader';
 import OvhMicroFrontend from './src/framework.class';
 import OvhFragment from './src/fragment.class';
-import { FragmentConfig, uFrontendWindow } from './src/ufrontend';
+import { FragmentConfig } from './src/ufrontend';
 
 
 export default function registerApplication(applicationName: string): Promise<FragmentConfig> {
   return new Promise((resolve, reject) => {
-    (window as uFrontendWindow).WebComponents.waitFor(() => {
-      if (!(window as uFrontendWindow).ovhMicroFrontend) {
+    window.WebComponents.waitFor(() => {
+      if (!window.ovhMicroFrontend) {
         const ufrontend = new OvhMicroFrontend();
-        (window as uFrontendWindow).ovhMicroFrontend = ufrontend;
+        window.ovhMicroFrontend = ufrontend;
         ufrontend
           .init(applicationName)
           .then(resolve)
