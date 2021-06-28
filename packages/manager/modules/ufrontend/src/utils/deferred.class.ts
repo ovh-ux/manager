@@ -27,7 +27,7 @@ export interface CustomPromise<T> extends Omit<PromiseConstructor, "resolve"|"re
   reject: Reject;
 }
 
-export default class Deferred<T> {
+export class Deferred<T> {
   public result: T;
   public defer: CustomPromise<T>;
   isPending = false;

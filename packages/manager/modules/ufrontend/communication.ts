@@ -1,4 +1,4 @@
-import BaseApi, { TimeoutObject } from './src/api.base.class';
+import { OvhMicroFrontendBaseAPI as BaseApi, TimeoutObject } from './src/api.base.class';
 import { uFrontendWindow } from './src/ufrontend';
 import { Callback } from './src/utils/deferred.class';
 
@@ -17,8 +17,3 @@ export function listen(arg0: string | Callback, arg1?: Callback) {
   }
   return function unbind() { return; };
 }
-
-export default {
-  emit,
-  listen,
-};
