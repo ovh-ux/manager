@@ -28,12 +28,13 @@ export interface CustomPromise<T> extends Omit<PromiseConstructor, "resolve"|"re
 }
 
 export default class Deferred<T> {
-  private result: T;
+  public result: T;
   public defer: CustomPromise<T>;
   isPending = false;
 
   constructor(result?: T) {
     this.result = result;
+    this.defer = {} as CustomPromise<T>;
     this.defer.promise = this.resolver();
   }
 
