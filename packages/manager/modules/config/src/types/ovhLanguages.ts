@@ -9,7 +9,7 @@ export const enum CountryCode {
   CA = 'CA',
   EU = 'EU',
   FR = 'FR',
-  GB = 'GB'
+  GB = 'GB',
 }
 export type LangId = 'cs' | 'fi' | 'lt' | 'nl' | 'fr' | 'en';
 
@@ -19,7 +19,7 @@ export interface KeyPairName {
 }
 
 export type PreferredRegionByLang = {
-  [key in LangId]?: { [key in Region]?: CountryCode };
+  [langKey in LangId]?: { [regionKey in Region]?: CountryCode };
 };
 
 export interface OVHLanguages {

@@ -4,6 +4,7 @@ import OvhMicroFrontend from './framework.class';
 
 export default class OvhMicroFrontendFragmentAPI extends OvhMicroFrontendBaseAPI {
   private fragment: OvhFragment;
+
   constructor(ufrontend: OvhMicroFrontend, fragment: OvhFragment) {
     super(ufrontend);
     this.fragment = fragment;

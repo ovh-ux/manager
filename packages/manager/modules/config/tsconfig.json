@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
+    "moduleResolution": "Node",
     "lib": ["dom"],
     "module": "commonjs",
     "removeComments": true,
@@ -14,5 +15,5 @@
     "declarationDir": "dist/types"
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "dist"]
 }

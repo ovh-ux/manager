@@ -3,7 +3,7 @@ import { LANGUAGES, localeRegex, localeStorageKey } from './locale.constants';
 
 const preferredCountry = (language: LangId, region: Region) => {
   if (['FR', 'EN'].includes(language.toUpperCase())) {
-    const customLanguage = LANGUAGES.preferred[language][region];
+    const customLanguage = LANGUAGES?.preferred[language][region];
     if (customLanguage) {
       return customLanguage;
     }
@@ -36,12 +36,17 @@ export const findLanguage = (language: LangId, country: string) => {
   return LANGUAGES.defaultLoc;
 };
 
-export const findAvailableLocale = (userLocale: string, region = Region.EU): string => {
-  let splittedLocale: string[] = null
+export const findAvailableLocale = (
+  userLocale: string,
+  region = Region.EU,
+): string => {
+  let splittedLocale: string[] = null;
 
   // Handle specific browser locales gracefully, example : 'es-419'
   if (userLocale.match(/[-_][0-9]+$/)) {
-    splittedLocale = userLocale.split(/(-|_)/)[0].match(localeRegex) as string[];
+    splittedLocale = userLocale
+      .split(/(-|_)/)[0]
+      .match(localeRegex) as string[];
   } else {
     splittedLocale = userLocale.match(localeRegex) as string[];
   }
@@ -81,12 +86,4 @@ export const saveUserLocale = (locale: string) => {
 
 export const convertLanguageFromOVHToBCP47 = (language: string): string => {
   return language.replace('_', '-');
-};
-
-export default {
-  convertLanguageFromOVHToBCP47,
-  detectUserLocale,
-  saveUserLocale,
-  findAvailableLocale,
-  findLanguage,
 };

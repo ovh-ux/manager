@@ -1,14 +1,5 @@
-import _Environment from './environment';
 import 'whatwg-fetch';
-
-import {
-  convertLanguageFromOVHToBCP47 as _convertLanguageFromOVHToBCP47,
-  detectUserLocale as _detectUserLocale,
-  findLanguage as _findLanguage,
-  findAvailableLocale as _findAvailableLocale,
-} from './locale';
-
-import { LANGUAGES as _LANGUAGES } from './locale/locale.constants';
+import Environment from './environment';
 import { Region } from './types/ovhLanguages';
 
 export const HOSTNAME_REGIONS: Record<string, Region> = {
@@ -17,15 +8,18 @@ export const HOSTNAME_REGIONS: Record<string, Region> = {
   'us.ovhcloud.com': Region.US,
 };
 
-export const Environment = _Environment;
-export const convertLanguageFromOVHToBCP47 = _convertLanguageFromOVHToBCP47;
-export const detectUserLocale = _detectUserLocale;
-export const findLanguage = _findLanguage;
-export const findAvailableLocale = _findAvailableLocale;
-export const LANGUAGES = _LANGUAGES;
+export { default as Environment } from './environment';
+export {
+  convertLanguageFromOVHToBCP47,
+  detectUserLocale,
+  findLanguage,
+  findAvailableLocale,
+} from './locale';
+
+export { LANGUAGES } from './locale/locale.constants';
 
 export const fetchConfiguration = async (applicationName: string) => {
-  const environment = new Environment();
+  let environment = new Environment();
   let configurationURL = '/engine/2api/configuration';
   if (applicationName) {
     environment.setApplicationName(applicationName);
@@ -44,8 +38,8 @@ export const fetchConfiguration = async (applicationName: string) => {
     if (response.status === 401) {
       window.location.assign(
         `/auth?action=disconnect&onsuccess=${encodeURIComponent(
-          window.location.href
-        )}`
+          window.location.href,
+        )}`,
       );
     }
     const config = await response.json();
@@ -56,7 +50,7 @@ export const fetchConfiguration = async (applicationName: string) => {
     environment.setMessage(config.message);
     return environment;
   } catch (e) {
-    const environment = new Environment();
+    environment = new Environment();
     environment.setRegion(HOSTNAME_REGIONS[window.location.hostname]);
     return environment;
   }

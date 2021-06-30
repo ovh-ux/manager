@@ -1,11 +1,13 @@
-import OvhMicroFrontend from "./framework.class";
-import { Callback } from "./utils/deferred.class";
+import OvhMicroFrontend from './framework.class';
+import { Callback } from './utils/deferred.class';
+
 export interface TimeoutObject {
   timeout: number;
 }
 
 export class OvhMicroFrontendBaseAPI {
   ufrontend: OvhMicroFrontend;
+
   constructor(ufrontend: OvhMicroFrontend) {
     this.ufrontend = ufrontend;
   }

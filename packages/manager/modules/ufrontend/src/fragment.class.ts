@@ -4,6 +4,7 @@ import semverMaxSatisfaying from 'semver/ranges/max-satisfying';
 
 export default class OvhFragment extends HTMLElement {
   private scriptElement: HTMLScriptElement;
+
   constructor() {
     super();
     this.scriptElement = null;

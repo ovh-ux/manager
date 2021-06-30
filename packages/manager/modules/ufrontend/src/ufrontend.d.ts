@@ -1,12 +1,11 @@
-import Environment from '@ovh-ux/manager-config/dist/types/environment';
+import { Environment } from '@ovh-ux/manager-config/dist/types/environment/environment';
 import OvhMicroFrontendApplicationAPI from './api.application.class';
 import OvhMicroFrontendFragmentAPI from './api.fragment.class';
-import OvhFragment from './fragment.class';
 import OvhMicroFrontend from './framework.class';
 import { Callback, Reject, Resolve, VoidResolve } from './utils/deferred.class';
 
 export interface FragmentConfig {
-  parent?: OvhFragment;
+  parent?: HTMLElement;
   environment?: Environment;
   ufrontend?: OvhMicroFrontendFragmentAPI | OvhMicroFrontendApplicationAPI;
 }

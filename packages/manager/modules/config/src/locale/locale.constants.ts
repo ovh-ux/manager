@@ -53,9 +53,3 @@ export const LANGUAGES: OVHLanguages = {
 
 export const localeStorageKey = 'univers-selected-language';
 export const localeRegex = /^([a-zA-Z]+)(?:[_-]([a-zA-Z]+))?$/;
-
-export default {
-  LANGUAGES,
-  localeStorageKey,
-  localeRegex,
-};

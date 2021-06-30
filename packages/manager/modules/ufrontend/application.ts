@@ -3,8 +3,9 @@ import OvhMicroFrontend from './src/framework.class';
 import OvhFragment from './src/fragment.class';
 import { FragmentConfig } from './src/ufrontend';
 
-
-export default function registerApplication(applicationName: string): Promise<FragmentConfig> {
+export default function registerApplication(
+  applicationName: string,
+): Promise<FragmentConfig> {
   return new Promise((resolve, reject) => {
     window.WebComponents.waitFor(() => {
       if (!window.ovhMicroFrontend) {
