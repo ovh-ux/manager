@@ -7,11 +7,26 @@ export const enum Region {
 export const enum CountryCode {
   US = 'US',
   CA = 'CA',
-  EU = 'EU',
   FR = 'FR',
   GB = 'GB',
+  ES = 'ES',
+  PL = 'PL',
+  PT = 'PT',
+  IT = 'IT',
+  DE = 'DE',
 }
-export type LangId = 'cs' | 'fi' | 'lt' | 'nl' | 'fr' | 'en';
+export type LangId =
+  | 'cs'
+  | 'fi'
+  | 'lt'
+  | 'nl'
+  | 'fr'
+  | 'en'
+  | 'de'
+  | 'es'
+  | 'it'
+  | 'pl'
+  | 'pt';
 
 export interface KeyPairName {
   name: string;

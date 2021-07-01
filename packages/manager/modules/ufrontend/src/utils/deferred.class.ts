@@ -15,12 +15,13 @@
  * hello.resolve();
  * hello.promise.then(x => ...) // x = 'value'
  */
-export type Callback = (... args: unknown[]) => unknown;
+export type Callback = (...args: unknown[]) => unknown;
 export type Resolve<T> = (value?: T | PromiseLike<T>) => Promise<T>;
 export type VoidResolve<T> = (value?: T | PromiseLike<T>) => void;
 export type Reject = (reason?: unknown) => void;
 
-export interface CustomPromise<T> extends Omit<PromiseConstructor, "resolve"|"reject">{
+export interface CustomPromise<T>
+  extends Omit<PromiseConstructor, 'resolve' | 'reject'> {
   promise: Promise<T>;
   isPending: () => boolean;
   resolve: Resolve<T>;

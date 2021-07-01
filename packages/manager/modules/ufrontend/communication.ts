@@ -17,7 +17,5 @@ export function listen(arg0: string | Callback, arg1?: Callback) {
     const api = new BaseApi(window.ovhMicroFrontend);
     return arg1 ? api.listen(arg0, arg1) : api.listen(arg0);
   }
-  return function unbind() {
-    return;
-  };
+  return function unbind() {};
 }

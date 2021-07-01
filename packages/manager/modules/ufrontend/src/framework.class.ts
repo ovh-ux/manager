@@ -8,7 +8,7 @@ import {
   EnvironmentEventMessage,
   FragmentConfig,
   FragmentState,
-} from './ufrontend.d';
+} from './ufrontend';
 
 export default class OvhMicroFrontend {
   private environment: CustomPromise<Environment>;
