@@ -69,6 +69,9 @@ module.exports = (env = {}) => {
       ],
       mainFields: ['module', 'browser', 'main'],
     },
+    externals: {
+      'angular': 'angular',
+    },
     plugins: [
       new webpack.ContextReplacementPlugin(
         /moment[/\\]locale$/,
