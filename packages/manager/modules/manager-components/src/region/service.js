@@ -1,4 +1,5 @@
 import trim from 'lodash/trim';
+import { COUNTRIES } from './constants';
 
 export default class ovhManagerRegionService {
   /* @ngInject */
@@ -63,8 +64,8 @@ export default class ovhManagerRegionService {
     return translatedMicroRegionLocation || region;
   }
 
-  getRegionIconFlag(region) {
-    return `oui-flag_${this.getMacroRegionLowercase(region)}`;
+  static getRegionIconFlag(region) {
+    return `oui-flag oui-flag_${ovhManagerRegionService.getCountry(region)}`;
   }
 
   getTranslatedRegionContinent(region) {
@@ -83,9 +84,12 @@ export default class ovhManagerRegionService {
     return trim(translatedMicroRegionLocation.split('(')[1], ')');
   }
 
+  static getCountry(region) {
+    return COUNTRIES[region].toLowerCase();
+  }
+
   getRegion(regionParam) {
-    let region = regionParam;
-    region = region.toUpperCase();
+    const region = regionParam.toUpperCase();
     return {
       macroRegion: {
         code: this.constructor.getMacroRegion(region),
@@ -97,7 +101,7 @@ export default class ovhManagerRegionService {
       },
       location: this.getTranslatedMicroRegionLocation(region),
       continent: this.getTranslatedRegionContinent(region),
-      icon: this.getRegionIconFlag(region),
+      icon: ovhManagerRegionService.getRegionIconFlag(region),
       country: this.getRegionCountry(region),
     };
   }
