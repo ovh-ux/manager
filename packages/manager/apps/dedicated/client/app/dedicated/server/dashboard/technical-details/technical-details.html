@@ -18,7 +18,7 @@
     </oui-tile-definition>
     <oui-tile-button
         ng-if="$ctrl.isRamUpgradable()"
-        on-click="$ctrl.goToManualUpgrade('ram')"
+        on-click="$ctrl.goToUpgrade('ram')"
     >
         <span
             data-translate="dedicated_server_dashboard_technical_details_ram_upgrade"
@@ -48,7 +48,7 @@
     </oui-tile-definition>
     <oui-tile-button
         ng-if="$ctrl.isDisksUpgradable()"
-        on-click="$ctrl.goToManualUpgrade('storage')"
+        on-click="$ctrl.goToUpgrade('storage')"
     >
         <span
             data-translate="dedicated_server_dashboard_technical_details_data_disk_upgrade"

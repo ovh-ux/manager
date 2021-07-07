@@ -17,7 +17,7 @@
   "dedicated_server_dashboard_technical_details_ram_frequency_unit": "MHz",
   "dedicated_server_dashboard_technical_details_ram_upgrade": "Augmenter la RAM",
   "dedicated_server_dashboard_technical_details_system_disk_upgrade": "Augmenter le stockage système",
-  "dedicated_server_dashboard_technical_details_data_disk_upgrade": "Augmenter le stockage de données",
+  "dedicated_server_dashboard_technical_details_data_disk_upgrade": "Augmenter le stockage",
   "dedicated_server_dashboard_technical_details_cache_disk_upgrade": "Augmenter le stockage du cache",
   "dedicated_server_dashboard_technical_details_disk_none": "Aucun"
 }

@@ -1,0 +1,112 @@
+<oui-header
+    data-heading="{{:: ('dedicated_server_dashboard_upgrade_title_' + $ctrl.upgradeType) | translate }}"
+    description="{{:: ('dedicated_server_dashboard_upgrade_description_' + $ctrl.upgradeType) | translate }}"
+>
+    <oui-back-button
+        data-on-click="$ctrl.goBack()"
+        previous-page="{{:: 'dedicated_server_dashboard_upgrade_back_text' | translate }}"
+    >
+    </oui-back-button>
+</oui-header>
+
+<oui-stepper data-current-index="$ctrl.currentStep">
+    <oui-step-form
+        data-header="{{:: ('dedicated_server_dashboard_upgrade_select_option_title_' + $ctrl.upgradeType) | translate }}"
+        data-description="{{:: ('dedicated_server_dashboard_upgrade_select_option_description_' + $ctrl.upgradeType) | translate }}"
+        data-submit-text="{{:: 'dedicated_server_dashboard_upgrade_order' | translate }}"
+        data-on-submit="$ctrl.orderOption()"
+        data-valid="$ctrl.selectedOption"
+        data-editable="false"
+        data-prevent-next
+    >
+        <p
+            data-translate="dedicated_server_dashboard_upgrade_select_option_description"
+        ></p>
+        <oui-datagrid data-rows="$ctrl.options">
+            <oui-datagrid-column
+                data-title=":: 'dedicated_server_dashboard_upgrade_select_option_name' | translate"
+            >
+                <oui-radio
+                    data-name="selectedOption"
+                    data-model="$ctrl.selectedOption"
+                    data-value="$row"
+                    ><span data-ng-bind="$row.productName"></span>
+                </oui-radio>
+            </oui-datagrid-column>
+            <oui-datagrid-column
+                data-title=":: 'dedicated_server_dashboard_upgrade_select_option_price' | translate"
+            >
+                <span data-ng-bind="$ctrl.getOptionPrice($row).text"></span>
+            </oui-datagrid-column>
+        </oui-datagrid>
+        <oui-spinner
+            data-ng-if="$ctrl.orderInProgress"
+            data-size="m"
+        ></oui-spinner>
+    </oui-step-form>
+    <oui-step-form
+        data-header="{{:: 'dedicated_server_dashboard_upgrade_intervention_title' | translate }}"
+        data-description="{{:: 'dedicated_server_dashboard_upgrade_intervention_description' | translate }}"
+        data-on-focus="$ctrl.prepareInterventionData()"
+        data-submit-text="{{:: 'common_confirm' | translate }}"
+        data-on-submit="$ctrl.scheduleIntervention()"
+        data-cancel-text="{{:: 'common_cancel' | translate }}"
+        data-on-cancel="$ctrl.goBack()"
+        data-valid="$ctrl.interventionData.backupDone && $ctrl.interventionData.selectedDate"
+        data-editable="false"
+        data-prevent-next
+    >
+        <strong
+            data-translate="dedicated_server_dashboard_upgrade_intervention_backup_label"
+        ></strong>
+        <oui-checkbox
+            class="mb-3"
+            data-model="$ctrl.interventionData.backupDone"
+        >
+            <span
+                data-translate="dedicated_server_dashboard_upgrade_intervention_backup_description"
+            ></span>
+        </oui-checkbox>
+        <oui-message
+            class="mb-3"
+            data-ng-if="!$ctrl.interventionData.backupDone"
+            data-type="warning"
+        >
+            <span
+                data-translate="dedicated_server_dashboard_upgrade_intervention_backup_warning"
+            ></span>
+        </oui-message>
+        <strong
+            data-translate="dedicated_server_dashboard_upgrade_intervention_choice"
+        ></strong>
+        <oui-field
+            data-size="m"
+            data-label="{{:: 'dedicated_server_dashboard_upgrade_intervention_choose_date' | translate }}"
+        >
+            <oui-calendar
+                data-model="$ctrl.interventionData.selectedDate"
+                data-min-date="$ctrl.interventionData.minDate"
+            >
+            </oui-calendar>
+        </oui-field>
+        <oui-field
+            data-size="m"
+            data-label="{{:: 'dedicated_server_dashboard_upgrade_intervention_choose_time_slot' | translate }}"
+        >
+            <oui-calendar
+                data-model="$ctrl.interventionData.selectedDate"
+                data-min-date="$ctrl.interventionData.minDate"
+            >
+            </oui-calendar>
+        </oui-field>
+        <oui-message class="mb-3" data-type="warning">
+            <span
+                data-translate="dedicated_server_dashboard_upgrade_intervention_choice_warning"
+            ></span>
+        </oui-message>
+        <oui-spinner
+            data-ng-if="$ctrl.orderInProgress"
+            data-size="m"
+        ></oui-spinner>
+    </oui-step-form>
+</oui-stepper>

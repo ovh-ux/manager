@@ -272,7 +272,7 @@
         <div class="col-md-4" data-ng-if="$ctrl.technicalDetails">
             <dedicated-server-dashboard-technical-details
                 technical-details="$ctrl.technicalDetails"
-                go-to-manual-upgrade="$ctrl.goToManualUpgrade"
+                go-to-upgrade="$ctrl.goToUpgrade"
                 upgrade-with-ticket-available="$ctrl.upgradeWithTicketAvailable"
                 is-ram-upgradable="$ctrl.isRamUpgradable"
                 is-data-disk-upgradable="$ctrl.isDataDiskUpgradable"
@@ -331,9 +331,7 @@
                             data-ng-href="{{:: $ctrl.terminateLink }}"
                             data-ng-if="(!$ctrl.server.isExpired && !$ctrl.server.engagement) || $ctrl.resiliationCapability.message"
                         >
-                            <span
-                                data-translate="server_close_service"
-                            ></span>
+                            <span data-translate="server_close_service"></span>
                         </oui-action-menu-item>
                     </oui-action-menu>
                 </oui-tile-definition>

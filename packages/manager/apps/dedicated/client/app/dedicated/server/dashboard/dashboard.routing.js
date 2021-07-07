@@ -235,9 +235,9 @@ export default /* @ngInject */ ($stateProvider) => {
       vrackInfos: /* @ngInject */ ($stateParams, Server) =>
         Server.getVrackInfos($stateParams.productId),
       breadcrumb: () => null,
-      goToManualUpgrade: /* @ngInject */ ($state) => (selectedUpgrade) =>
+      goToUpgrade: /* @ngInject */ ($state) => (upgradeType) =>
         $state.go('app.dedicated-server.server.dashboard.upgrade', {
-          selectedUpgrade,
+          upgradeType,
         }),
       upgradeWithTicketAvailable: /* @ngInject */ (ovhFeatureFlipping) =>
         ovhFeatureFlipping
