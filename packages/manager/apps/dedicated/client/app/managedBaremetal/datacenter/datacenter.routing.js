@@ -33,6 +33,7 @@ export default /* @ngInject */ ($stateProvider) => {
       drpState: () => 'app.managedBaremetal.details.datacenters.datacenter.drp',
       hostsState: () =>
         'app.managedBaremetal.details.datacenters.datacenter.hosts',
+      drpAvailability: /* @ngInject */ () => true,
       goToHosts: /* @ngInject */ ($state) => () =>
         $state.go('app.managedBaremetal.details.datacenters.datacenter.hosts'),
       goToDatastores: /* @ngInject */ ($state) => () =>
