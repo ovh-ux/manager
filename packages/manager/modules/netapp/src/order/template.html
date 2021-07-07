@@ -8,25 +8,17 @@
             on-focus="$ctrl.onFocus('step1')"
             on-submit="$ctrl.onSubmit(form)"
         >
-            <oui-field label="Email" size="xl">
-                <input
-                    class="oui-input"
-                    type="email"
-                    name="email"
-                    data-ng-model="$ctrl.user.email"
-                    required
-                />
-            </oui-field>
+            <ovh-manager-region-selector
+                regions="$ctrl.regions"
+                model="$ctrl.selectedRegion"
+            ></ovh-manager-region-selector>
         </oui-step-form>
 
         <oui-step-form
-            name="step2"
-            header="Step 2"
-            description="This is a description"
-            on-cancel="$ctrl.onCancel()"
-            on-focus="$ctrl.onFocus('step2')"
-            on-submit="$ctrl.onSubmit(form)"
-            skippable
+            name="license"
+            header="{{:: 'netapp_order_performance_level' | translate }}"
+            description="{{:: 'netapp_order_performance_description' | translate }}"
+            on-focus="$ctrl.onLicenceStepFocus()"
         >
             <oui-field label="Firstname" size="xl">
                 <input

@@ -7,12 +7,16 @@ export default class OvhManagerNetAppOrderCtrl {
   }
 
   $onInit() {
+    this.selectedRegion = null;
     this.regions = uniq(
       this.catalog.plans.flatMap(
         ({ configurations }) =>
           configurations.find(({ name }) => name === 'region').values,
       ),
     );
-    console.log(this.regions);
+  }
+
+  onLicenceStepFocus() {
+    console.log(this.selectedRegion, this.catalog.plans);
   }
 }
