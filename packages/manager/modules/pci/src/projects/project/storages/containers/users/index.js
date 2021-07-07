@@ -5,28 +5,26 @@ import '@uirouter/angularjs';
 import 'angular-translate';
 import '@ovh-ux/ui-kit';
 import 'ovh-api-services';
+import 'angular-ui-bootstrap';
 
-import container from '../../containers/container';
-import deleteContainer from './delete';
-import addObject from './object/add';
-import deleteObject from './object/delete';
-import routing from './object.routing';
+import component from './users.component';
+import routing from './users.routing';
+import deleteUser from './delete';
 
-const moduleName = 'ovhManagerPciStoragesObjectsObjectObject';
+const moduleName = 'ovhManagerPciStoragesContainersUserList';
 
 angular
   .module(moduleName, [
-    container,
-    addObject,
-    deleteContainer,
-    deleteObject,
     'ngTranslateAsyncLoader',
     'oui',
     'ovh-api-services',
     'ovhManagerCore',
     'pascalprecht.translate',
     'ui.router',
+    'ui.bootstrap',
+    deleteUser,
   ])
+  .component('pciProjectStorageContainersUsers', component)
   .config(routing)
   .run(/* @ngTranslationsInject:json ./translations */);
 

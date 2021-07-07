@@ -1,4 +1,5 @@
 import angular from 'angular';
+import compact from 'lodash/compact';
 import endsWith from 'lodash/endsWith';
 import find from 'lodash/find';
 import get from 'lodash/get';
@@ -386,6 +387,51 @@ export default class PciStoragesContainersService {
     return this.$q.resolve();
   }
 
+  getUserDetails(projectId, userId) {
+    return this.$http
+      .get(`/cloud/project/${projectId}/user/${userId}`)
+      .then(({ data }) => data);
+  }
+
+  removeAllCredentials(projectId, userId, credentials) {
+    return this.$q.all(
+      map(credentials, (credential) =>
+        this.$http.delete(
+          `/cloud/project/${projectId}/user/${userId}/s3Credentials/${credential.access}`,
+        ),
+      ),
+    );
+  }
+
+  getS3Credentials(projectId, userId) {
+    return this.$http
+      .get(`/cloud/project/${projectId}/user/${userId}/s3Credentials`)
+      .then(({ data }) => data);
+  }
+
+  getS3Users(projectId) {
+    return this.OvhApiCloudProjectUser.v6()
+      .query({
+        serviceName: projectId,
+      })
+      .$promise.then((users) =>
+        compact(
+          this.$q.all(
+            map(users, (user) =>
+              this.getS3Credentials(projectId, user.id).then((data) =>
+                data.length > 0
+                  ? {
+                      ...user,
+                      s3Credentials: data,
+                    }
+                  : undefined,
+              ),
+            ),
+          ),
+        ),
+      );
+  }
+
   getPriceEstimation(ovhSubsidiary) {
     return this.OvhApiOrderCatalogPublic.v6()
       .get({
@@ -409,5 +455,11 @@ export default class PciStoragesContainersService {
         });
         return priceObj;
       });
+  }
+
+  getUserStoragePolicy(projectId, userId) {
+    return this.$http
+      .get(`/cloud/project/${projectId}/user/${userId}/policy`)
+      .then(({ data }) => data);
   }
 }
