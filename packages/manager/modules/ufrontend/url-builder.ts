@@ -5,7 +5,10 @@ interface OvhURL {
 }
 type ParamValueType = string | number | boolean;
 
-const buildURLPattern = (pattern: string, params: Record<string, ParamValueType>) => {
+const buildURLPattern = (
+  pattern: string,
+  params: Record<string, ParamValueType>,
+) => {
   let url = pattern;
   let filteredParams = params;
 

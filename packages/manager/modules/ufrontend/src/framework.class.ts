@@ -12,8 +12,11 @@ import {
 
 export default class OvhMicroFrontend {
   private environment: CustomPromise<Environment>;
+
   private fragments: Record<string, CustomPromise<OvhFragment>>;
+
   private listeners: Array<Callback>;
+
   private messages: Array<EnvironmentEventMessage>;
 
   constructor() {

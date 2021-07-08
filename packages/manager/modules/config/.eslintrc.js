@@ -11,10 +11,10 @@ module.exports = {
       rules: {
         '@typescript-eslint/explicit-module-boundary-types': 'off',
         '@typescript-eslint/no-empty-function': 'off',
-        'lines-between-class-members': 'off',
         'import/extensions': 'off',
         'no-use-before-define': 'off',
         'no-shadow': 'off',
+        '@typescript-eslint/no-use-before-define': ['error'],
         '@typescript-eslint/no-shadow': ['error'],
       },
     },

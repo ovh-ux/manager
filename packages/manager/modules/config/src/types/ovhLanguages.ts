@@ -15,18 +15,7 @@ export const enum CountryCode {
   IT = 'IT',
   DE = 'DE',
 }
-export type LangId =
-  | 'cs'
-  | 'fi'
-  | 'lt'
-  | 'nl'
-  | 'fr'
-  | 'en'
-  | 'de'
-  | 'es'
-  | 'it'
-  | 'pl'
-  | 'pt';
+export type LangId = 'nl' | 'fr' | 'en' | 'de' | 'es' | 'it' | 'pl' | 'pt';
 
 export interface KeyPairName {
   name: string;

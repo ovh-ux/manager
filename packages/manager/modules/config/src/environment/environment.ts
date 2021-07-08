@@ -9,7 +9,7 @@ import { User } from '../types/user';
 
 export type EnvMessage = {
   [key in LangId]: { description: string };
-}
+};
 
 export interface IEnvironment {
   getRegion: () => Region;
@@ -32,12 +32,19 @@ export interface IEnvironment {
 }
 export class Environment implements IEnvironment {
   private region: Region;
+
   private userLocale: string;
+
   private version: string;
+
   private user: User;
+
   private applicationName: string;
+
   private universe: string;
+
   private applicationURLs: Record<string, string>;
+
   private message: EnvMessage;
 
   constructor() {
@@ -62,7 +69,7 @@ export class Environment implements IEnvironment {
     return this.region;
   }
 
-  setUser(user: User): void{
+  setUser(user: User): void {
     this.user = user;
   }
 
