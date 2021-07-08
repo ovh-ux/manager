@@ -43,8 +43,16 @@ angular.service('MyService', ($q) => {
   reketInstance.config.hooks.response.set(null, responseErrorHook);
 
   // use your Reket instance
-  reketInstance.get('/my/url').then((response) => {
-    console.log(response);
-  });
+  reketInstance
+    .get('/my/url')
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+    .finally(() => {
+      console.log('called after then or catch');
+    });
 });
 ```
