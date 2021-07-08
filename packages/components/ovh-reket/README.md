@@ -2,7 +2,7 @@
 > Provides a centralized predefined Reket configuration.
 
 ## Methods
-### useReket(enableSsoAuth = false, requestTypes = 'default')
+### useReket(enableSsoAuth = true, requestTypes = 'default')
 ```js
 import { useReket } from '@ovh-ux/ovh-reket';
 
@@ -16,7 +16,7 @@ reketInstance.get('/my/url').then((response) => {
 
 ##### enableSsoAuth
 
-Type: `boolean` - default: `false`
+Type: `boolean` - default: `true`
 
 Configure response error hook to handle ssoAuth. This handle logout and redirection to login page in case of non authenticated user.
 

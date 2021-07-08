@@ -4,7 +4,7 @@ import { useOvhPaymentMethod } from '@ovh-ux/ovh-payment-method';
 export default class OvhPaymentMethodService {
   /* @ngInject */
   constructor($q, coreConfig, paymentMethodPageUrl, userLocale) {
-    const ovhPaymentMethodReketInstance = useReket();
+    const ovhPaymentMethodReketInstance = useReket(false);
     const responseErrorHook = (error) => {
       return ssoAuthHookFn(error).catch((hookFnError) =>
         $q.reject(hookFnError),
