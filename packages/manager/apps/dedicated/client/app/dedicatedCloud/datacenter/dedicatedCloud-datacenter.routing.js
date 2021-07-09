@@ -31,6 +31,12 @@ export default /* @ngInject */ ($stateProvider) => {
         'app.dedicatedCloud.details.datacenter.details.datastores',
       drpState: () => 'app.dedicatedCloud.details.datacenter.details.drp',
       hostsState: () => 'app.dedicatedCloud.details.datacenter.details.hosts',
+      drpAvailability: /* @ngInject */ (ovhFeatureFlipping) =>
+        ovhFeatureFlipping
+          .checkFeatureAvailability('dedicated-cloud:drp')
+          .then((featureAvailability) =>
+            featureAvailability.isFeatureAvailable('dedicated-cloud:drp'),
+          ),
       goToHosts: /* @ngInject */ ($state) => () =>
         $state.go('app.dedicatedCloud.details.datacenter.details.hosts'),
       goToDatastores: /* @ngInject */ ($state) => () =>
