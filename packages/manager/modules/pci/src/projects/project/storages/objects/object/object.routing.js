@@ -25,6 +25,11 @@ export default /* @ngInject */ ($stateProvider) => {
           containerId,
           objectId: object.name,
         }),
+      goToAddUserObject: /* @ngInject */ ($state, projectId) => (object) =>
+        $state.go('pci.projects.project.storages.objects.object.addUser', {
+          projectId,
+          containerId: object.objectKey,
+        }),
       goBack: /* @ngInject */ (goToStorageContainers) => goToStorageContainers,
 
       goToStorageContainer: /* @ngInject */ (
