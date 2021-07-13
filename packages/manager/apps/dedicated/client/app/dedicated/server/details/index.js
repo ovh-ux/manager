@@ -13,6 +13,7 @@ import interfaces from '../interfaces/interfaces.module';
 import monitoring from '../monitoring';
 import tasks from '../tasks';
 import interventions from '../intervention';
+import netboot from '../netboot';
 
 import bandwidthVrackOrderService from './server.bandwidth-vrack-order.service';
 import component from './server.component';
@@ -37,6 +38,7 @@ angular
     tasks,
     'ui.router',
     interventions,
+    netboot,
   ])
   .component('dedicatedServer', component)
   .config(routing)
