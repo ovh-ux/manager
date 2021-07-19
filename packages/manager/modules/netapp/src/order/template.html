@@ -4,9 +4,7 @@
         <oui-step-form
             name="region"
             header="{{:: 'netapp_order_datacenter' | translate }}"
-            on-cancel="$ctrl.onCancel()"
-            on-focus="$ctrl.onFocus('step1')"
-            on-submit="$ctrl.onSubmit(form)"
+            data-valid="$ctrl.selectedRegion"
         >
             <ovh-manager-region-selector
                 regions="$ctrl.regions"
@@ -17,38 +15,45 @@
         <oui-step-form
             name="license"
             header="{{:: 'netapp_order_performance_level' | translate }}"
-            description="{{:: 'netapp_order_performance_description' | translate }}"
+            description="{{:: 'netapp_order_performance_level_description' | translate }}"
             on-focus="$ctrl.onLicenceStepFocus()"
+            data-valid="$ctrl.selectedLicense"
         >
-            <oui-field label="Firstname" size="xl">
-                <input
-                    class="oui-input"
-                    type="text"
-                    name="firstname"
-                    data-ng-model="$ctrl.user.firstname"
-                    maxlength="32"
-                />
-            </oui-field>
+            <div class="row">
+                <div class="col-md-3">
+                    <oui-select-picker
+                        data-ng-repeat="license in $ctrl.licenses track by $index"
+                        name="license"
+                        model="$ctrl.selectedLicense"
+                        label="{{:: ('netapp_order_performance_level_type_' + license) | translate }}"
+                        on-change="$ctrl.onChange(modelValue)"
+                        values="[license]"
+                    >
+                    </oui-select-picker>
+                </div>
+            </div>
         </oui-step-form>
 
         <oui-step-form
-            name="step3"
-            header="Step 3"
-            description="This is a description"
-            on-cancel="$ctrl.onCancel()"
-            on-focus="$ctrl.onFocus('step3')"
-            on-submit="$ctrl.onSubmit(form)"
-            skippable
+            name="size"
+            header="{{:: 'netapp_order_size' | translate }}"
+            description="{{:: 'netapp_order_size_description' | translate }}"
+            on-focus="$ctrl.onSizeStepFocus()"
+            data-valid="$ctrl.selectedSize"
         >
-            <oui-field label="Lastname" size="xl">
-                <input
-                    class="oui-input"
-                    type="text"
-                    name="lastname"
-                    data-ng-model="$ctrl.user.lastname"
-                    maxlength="32"
-                />
-            </oui-field>
+            <div class="row">
+                <div class="col-md-3">
+                    <oui-select-picker
+                        data-ng-repeat="license in $ctrl.licenses track by $index"
+                        name="license"
+                        model="$ctrl.selectedLicense"
+                        label="{{:: ('netapp_order_performance_level_type_' + license) | translate }}"
+                        on-change="$ctrl.onChange(modelValue)"
+                        values="[license]"
+                    >
+                    </oui-select-picker>
+                </div>
+            </div>
         </oui-step-form>
     </oui-stepper>
 </div>

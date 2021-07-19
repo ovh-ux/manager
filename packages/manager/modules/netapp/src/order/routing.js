@@ -1,6 +1,6 @@
 export default /* @ngInject */ ($stateProvider) => {
   $stateProvider.state('netapp.order', {
-    url: '/install',
+    url: '/new',
     views: {
       netappContainer: {
         component: 'ovhManagerNetAppOrder',
