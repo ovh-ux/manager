@@ -11,7 +11,12 @@ import {
 import registerApplication from '@ovh-ux/ufrontend/application';
 import { buildURL } from '@ovh-ux/ufrontend/url-builder';
 import { findAvailableLocale, detectUserLocale } from '@ovh-ux/manager-config';
+
+import bootstrapShellApplication from '@ovh-ux/manager-shell';
+
 import { BILLING_REDIRECTIONS } from './constants';
+
+bootstrapShellApplication({ app: 'hub' });
 
 attachPreloader(findAvailableLocale(detectUserLocale()));
 

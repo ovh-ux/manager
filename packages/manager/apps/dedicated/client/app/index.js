@@ -7,6 +7,12 @@ import {
 import registerApplication from '@ovh-ux/ufrontend/application';
 import { findAvailableLocale, detectUserLocale } from '@ovh-ux/manager-config';
 
+import bootstrapShellApplication from '@ovh-ux/manager-shell';
+
+bootstrapShellApplication({
+  app: 'dedicated',
+});
+
 attachPreloader(findAvailableLocale(detectUserLocale()));
 
 registerApplication('dedicated').then(({ environment }) => {
