@@ -1,0 +1,18 @@
+{
+  "name": "@jdec/cucumber-testcafe-ui",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "license": "ISC",
+  "author": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx gherkin-testcafe chromium,firefox"
+  },
+  "devDependencies": {
+    "@cucumber/cucumber": "^7.2.1",
+    "gherkin-testcafe": "^5.0.0",
+    "testcafe": "^1.14.0",
+    "testcafe-cucumber-steps": "^1.19.0"
+  }
+}
