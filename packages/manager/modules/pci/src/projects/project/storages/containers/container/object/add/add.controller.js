@@ -1,4 +1,5 @@
 import get from 'lodash/get';
+import { S3Client } from "@aws-sdk/client-s3";
 
 export default class PciBlockStorageContainersContainerObjectAddController {
   /* @ngInject */
