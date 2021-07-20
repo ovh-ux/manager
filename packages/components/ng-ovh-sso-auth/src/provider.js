@@ -452,10 +452,37 @@ export default function() {
               logoutUrl.indexOf('?') > -1 ? '&' : '?'
             }ovhSubsidiary=${this.user.ovhSubsidiary}`;
           }
-          $window.location.assign(logoutUrl);
+
+          if (this.isInIframe()) {
+            window.parent.postMessage(
+              {
+                type: 'redirect',
+                url: logoutUrl,
+              },
+              '*',
+            );
+          } else {
+            $window.location.assign(logoutUrl);
+          }
         });
       }
       return deferredObj.logout.promise;
+    };
+
+    /**
+     * @ngdoc function
+     * @name isInIframe
+     * @methodOf ovh-angular-sso-auth.ssoAuthentication
+     *
+     * @description
+     * Returns true if the application is in an iframe context
+     */
+    this.isInIframe = function isInIframe() {
+      try {
+        return window.self !== window.top;
+      } catch {
+        return true;
+      }
     };
 
     /**
@@ -468,28 +495,37 @@ export default function() {
      */
     this.goToLoginPage = function goToLoginPage(url) {
       if (!deferredObj.loginPage) {
+        const params = [];
+
         deferredObj.loginPage = $q.defer();
 
-        // redirect to login page
-        $timeout(() => {
-          const params = [];
+        if (ovhSubsidiary) {
+          params.push(`ovhSubsidiary=${ovhSubsidiary}`);
+        }
 
-          if (ovhSubsidiary) {
-            params.push(`ovhSubsidiary=${ovhSubsidiary}`);
-          }
-
-          if (loginUrl.indexOf('onsuccess') === -1) {
-            params.push(
-              `onsuccess=${encodeURIComponent(url || $location.absUrl())}`,
-            );
-          }
-
-          $window.location.assign(
-            loginUrl +
-              (loginUrl.indexOf('?') > -1 ? '&' : '?') +
-              params.join('&'),
+        if (loginUrl.indexOf('onsuccess') === -1) {
+          params.push(
+            `onsuccess=${encodeURIComponent(url || $location.absUrl())}`,
           );
-        });
+        }
+
+        const targetUrl =
+          loginUrl +
+          (loginUrl.indexOf('?') > -1 ? '&' : '?') +
+          params.join('&');
+
+        if (this.isInIframe()) {
+          window.parent.postMessage(
+            {
+              type: 'redirect',
+              url: targetUrl,
+            },
+            '*',
+          );
+        } else {
+          // redirect to login page
+          $timeout(() => $window.location.assign(targetUrl));
+        }
       }
       return deferredObj.loginPage.promise;
     };
@@ -533,11 +569,22 @@ export default function() {
             }
           }
 
-          $window.location.assign(
+          const targetUrl =
             destUrl +
-              (urlPart.indexOf('?') > -1 ? '&' : '?') +
-              params.join('&'),
-          );
+            (urlPart.indexOf('?') > -1 ? '&' : '?') +
+            params.join('&');
+
+          if (this.isInIframe()) {
+            window.parent.postMessage(
+              {
+                type: 'redirect',
+                url: targetUrl,
+              },
+              '*',
+            );
+          } else {
+            $window.location.assign(targetUrl);
+          }
         });
       }
       return deferredObj.signUpPage.promise;
