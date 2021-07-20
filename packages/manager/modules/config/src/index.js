@@ -24,6 +24,14 @@ export const findLanguage = _findLanguage;
 export const findAvailableLocale = _findAvailableLocale;
 export const LANGUAGES = _LANGUAGES;
 
+function isInIframe() {
+  try {
+    return window.self !== window.top;
+  } catch {
+    return true;
+  }
+}
+
 export const fetchConfiguration = (applicationName) => {
   const environment = new Environment();
   let configurationURL = '/engine/2api/configuration';
@@ -42,11 +50,23 @@ export const fetchConfiguration = (applicationName) => {
   })
     .then((response) => {
       if (response.status === 401) {
-        window.location.assign(
-          `/auth?action=disconnect&onsuccess=${encodeURIComponent(
-            window.location.href,
-          )}`,
-        );
+        if (isInIframe()) {
+          window.parent.postMessage(
+            {
+              type: 'redirect',
+              url: `/auth?action=disconnect&onsuccess=${encodeURIComponent(
+                window.location.href,
+              )}`,
+            },
+            '*',
+          );
+        } else {
+          window.location.assign(
+            `/auth?action=disconnect&onsuccess=${encodeURIComponent(
+              window.location.href,
+            )}`,
+          );
+        }
       }
       return response.json();
     })
