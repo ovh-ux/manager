@@ -77,9 +77,21 @@ export default class {
         this.mainLinks = universes.map(({ universe: name, url }) => ({
           name,
           title: this.$translate.instant(`navbar_universe_${name}`),
-          url: url || '#',
+          url: (url || '#')
+            .replace('https://www.ovh.com/manager', '') // @TODO for testing purposes, to be removed
+            .replace('https://www.ovhtelecom.fr/manager', '/telecom'), // @TODO for testing purposes, to be removed
           isPrimary: !NON_PRIMARY_ITEMS.includes(name),
         }));
+        // @TODO for testing purposes, to be removed
+        this.mainLinks = this.mainLinks.map((link) => {
+          if (link.url === '/') {
+            return {
+              ...link,
+              url: '/hub',
+            };
+          }
+          return link;
+        });
       },
     );
   }
