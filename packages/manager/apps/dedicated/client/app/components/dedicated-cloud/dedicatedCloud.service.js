@@ -268,6 +268,18 @@ class DedicatedCloudService {
     );
   }
 
+  getCommercialRangeCompliance(serviceName) {
+    return this.OvhHttp.get(
+      '/dedicatedCloud/{serviceName}/commercialRange/compliance',
+      {
+        rootPath: 'apiv6',
+        urlParams: {
+          serviceName,
+        },
+      },
+    );
+  }
+
   addDatacenter(serviceName, commercialRangeName) {
     return this.OvhHttp.post('/dedicatedCloud/{serviceName}/datacenter', {
       rootPath: 'apiv6',
@@ -1343,6 +1355,32 @@ class DedicatedCloudService {
           reason,
           token,
           commentary,
+        },
+      },
+    );
+  }
+
+  /* ------- Management Fees -------*/
+  getManagementFee(serviceName, planCode, quantity) {
+    return this.OvhHttp.get(
+      `/order/upgrade/privateCloudManagementFee/${serviceName}%2Fmanagementfee/${planCode}`,
+      {
+        rootPath: 'apiv6',
+        params: {
+          quantity,
+        },
+      },
+    );
+  }
+
+  orderManagementFee(serviceName, planCode, quantity) {
+    return this.OvhHttp.post(
+      `/order/upgrade/privateCloudManagementFee/${serviceName}%2Fmanagementfee/${planCode}`,
+      {
+        rootPath: 'apiv6',
+        data: {
+          quantity,
+          autoPayWithPreferredPaymentMethod: true,
         },
       },
     );
