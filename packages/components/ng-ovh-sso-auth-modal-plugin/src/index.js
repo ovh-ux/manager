@@ -1,5 +1,6 @@
 // dependencies.
 import angular from 'angular';
+import set from 'lodash/set';
 
 // peerDependencies.
 import '@ovh-ux/ng-ovh-sso-auth';
@@ -26,10 +27,9 @@ angular
     $provide.decorator(
       'ssoAuthentication',
       ($delegate, ssoAuthModalPluginFct) => {
-        // eslint-disable-next-line no-param-reassign
-        $delegate.handleSwitchSession = () =>
-          ssoAuthModalPluginFct.handleSwitchSession($delegate);
-
+        set($delegate, 'handleSwitchSession', () =>
+          ssoAuthModalPluginFct.handleSwitchSession($delegate),
+        );
         return $delegate;
       },
     );
