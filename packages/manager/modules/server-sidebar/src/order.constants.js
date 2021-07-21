@@ -424,7 +424,10 @@ export const ORDER_URLS = {
       US: 'https://us.ovhcloud.com/cloud/cloud-disk-array/',
     },
     veeam: {},
-    veeam_enterprise: {},
+    veeam_enterprise: {
+      US:
+        'https://us.ovhcloud.com/enterprise/products/hosted-private-cloud/veeam-enterprise/',
+    },
     vrack: {
       US:
         "https://us.ovhcloud.com/order/express/#/express/review?products=~(~(planCode~'vrack~quantity~1~productId~'vrack))",
@@ -578,7 +581,7 @@ export const SIDEBAR_ORDER_CONFIG = [
     target: '_blank',
     external: true,
     app: [DEDICATED],
-    regions: ['EU', 'CA'],
+    regions: ['EU', 'CA', 'US'],
     tracker: 'dedicated::orders::veeam-enterprise::order',
   },
   {
