@@ -367,16 +367,17 @@ export default function() {
     this.login = function login() {
       const self = this;
 
-      // use fetch for checking if SESSION cookie is set
-      fetch(self.getUserUrl(), {
+      // use jQuery ajax for checking if SESSION cookie setted
+      $.ajax({
+        url: self.getUserUrl(),
+        method: 'GET',
         headers,
-        credentials: 'same-origin',
       })
-        .then((data) => this.onLoginSuccess(data.json()))
-        .catch(() => {
+        .done((data) => this.onLoginSuccess(data))
+        .fail(() => {
           isLogged = false;
         })
-        .finally(() => this.onPostLogin());
+        .always(() => this.onPostLogin());
 
       return deferredObj.login.promise;
     };
